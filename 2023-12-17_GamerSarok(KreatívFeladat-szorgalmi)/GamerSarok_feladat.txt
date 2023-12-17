@@ -1,0 +1,7 @@
+Készíts egy online galériát az img-ben található képeknek, törekedj a responsivitásra! 
+A responsivitást, sima css vagy bootstrap segítségével is megvalósíthatod, ezt rád bízom.
+
+Használd a fantáziád! :)
+
+A feladatot miután megcsináltad, mindenképp küld el a 
+cybers.prog.tech@gmail.com e-mail címre, mert kíváncsi vagyok rá!
