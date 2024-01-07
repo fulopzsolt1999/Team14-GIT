@@ -57,6 +57,30 @@ body {
    color: red;
 }
 
+.menu .menu-hover {
+   display: inline-block;
+   position: relative;
+   color: red;
+}
+
+.menu .menu-hover::after {
+   content: "";
+   position: absolute;
+   width: 100%;
+   transform: scaleX(0);
+   height: 2px;
+   bottom: 0;
+   left: 0;
+   background-color: red;
+   transform-origin: bottom right;
+   transition: transform 0.25s ease-out;
+}
+
+.menu .menu-hover:hover::after {
+   transform: scaleX(1);
+   transform-origin: bottom left;
+}
+
 /* ###### Welcome section ###### */
 
 .welcome {
@@ -116,7 +140,7 @@ body {
 }
 
 #gallery .card-body {
-   background-color: rgb(107, 25, 25);
+   background-color: rgb(71, 17, 17);
    color: white;
    display: flex;
    justify-content: center;
@@ -138,7 +162,7 @@ body {
    position: absolute;
    left: 0;
    bottom: -1800px;
-   background-color: rgb(154, 74, 74);
+   background-color: rgb(162, 91, 91);
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -171,7 +195,8 @@ body {
 
 footer {
    position: absolute;
-   bottom: -1850px;
+   bottom: -1830px;
+   padding-bottom: 5px;
    left: 50%;
    transform: translate(-50%);
    color: white;
