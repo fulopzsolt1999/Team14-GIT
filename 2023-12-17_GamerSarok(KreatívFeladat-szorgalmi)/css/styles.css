@@ -16,35 +16,30 @@ body {
    background-repeat: no-repeat;
    max-width: 100%;
    height: 100vh;
-   position: relative;
 }
 
 /* ###### Nav menu ###### */
 
 .menu {
-   position: relative;
+   width: 100%;
    height: 65px;
+   padding: 0 30px;
    background-color: rgba(0, 0, 0, 0.7);
    border-radius: 4px;
 }
 
 .menu .navbar-brand {
-   position: absolute;
    color: red;
-   top: 8px;
-   left: 20px;
    font-size: 26px;
    font-weight: 500;
 }
 
 .menu ul {
+   padding-top: 3px;
    list-style: none;
    color: red;
    display: flex;
    flex-direction: row;
-   position: absolute;
-   right: 30px;
-   top: 12px;
    font-size: 25px;
 }
 
@@ -83,21 +78,15 @@ body {
 
 /* ###### Welcome section ###### */
 
-.welcome {
+#welcome {
    width: 100%;
-   height: 650px;
-   position: absolute;
+   height: 500px;
    margin-top: 50px;
    padding-top: 100px;
-   left: 50%;
-   transform: translate(-50%);
    color: rgba(255, 0, 0, 0.9);
 }
 
 #welcome-text {
-   position: absolute;
-   left: 50%;
-   transform: translate(-50%);
    display: flex;
    justify-content: center;
    text-align: center;
@@ -107,11 +96,11 @@ body {
    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.welcome h1 {
+#welcome h1 {
    font-weight: bold;
 }
 
-.welcome p {
+#welcome p {
    font-size: 18px;
    font-style: italic;
 }
@@ -119,24 +108,27 @@ body {
 /* ###### Gallery section ###### */
 
 #gallery {
-   width: fit-content;
+   width: 100%;
+   padding-bottom: 50px;
    display: grid;
-   position: absolute;
    grid-template-columns: repeat(3, 400px);
    grid-template-rows: repeat(4);
    gap: 20px;
    justify-content: center;
-   top: 600px;
-   left: 50%;
-   transform: translate(-50%);
 }
 
 #gallery .card {
+   width: 18rem;
    margin: 0 auto;
    -webkit-box-shadow: 0px 0px 5px 4px rgba(255, 0, 0, 0.8);
    -moz-box-shadow: 0px 0px 5px 4px rgba(255, 0, 0, 0.8);
    box-shadow: 0px 0px 5px 4px rgba(255, 0, 0, 0.8);
    border-radius: 4px;
+   transition: all ease 1s;
+}
+
+#gallery .card:hover {
+   width: 400px;
 }
 
 #gallery .card-body {
@@ -153,73 +145,9 @@ body {
    text-align: justify;
 }
 
-/* ###### Contact section ###### */
-
-#contact {
-   width: 100%;
-   height: 400px;
-   padding-top: 20px;
-   position: absolute;
-   left: 0;
-   bottom: -1800px;
-   background-color: rgb(162, 91, 91);
+#footer {
    display: flex;
-   flex-direction: column;
-   align-items: center;
+   justify-content: center;
    color: white;
-}
-
-#contact h1 {
-   font-weight: bold;
-}
-
-#contact form {
-   width: 500px;
-}
-
-#contact .form-row {
-   padding: 10px;
-}
-
-#contact form label {
-   font-weight: bold;
-}
-
-#contact form input {
-   background-color: transparent;
-   border: 2px solid black;
-   border-radius: 4px;
-   color: white;
-}
-
-#contact form textarea {
-   width: 100%;
-   height: 100px;
-   background-color: transparent;
-   border: 2px solid black;
-   border-radius: 4px;
-   color: white;
-}
-
-#contact form #submit {
-   position: absolute;
-   right: 550px;
-   bottom: 135px;
-   width: 100px;
-   height: 50px;
-   transition: all ease 1s;
-}
-
-#contact form #submit:hover {
-   background-color: black;
-   border-color: white;
-}
-
-footer {
-   position: absolute;
-   bottom: -1830px;
-   padding-bottom: 5px;
-   left: 50%;
-   transform: translate(-50%);
-   color: white;
+   background-color: rgb(71, 17, 17);
 }
