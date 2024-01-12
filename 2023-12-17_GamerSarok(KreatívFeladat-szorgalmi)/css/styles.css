@@ -166,7 +166,11 @@ body {
    display: flex;
    flex-direction: column;
    align-items: center;
-   color: black;
+   color: white;
+}
+
+#contact h1 {
+   font-weight: bold;
 }
 
 #contact form {
@@ -175,6 +179,10 @@ body {
 
 #contact .form-row {
    padding: 10px;
+}
+
+#contact form label {
+   font-weight: bold;
 }
 
 #contact form input {
@@ -191,6 +199,20 @@ body {
    border: 2px solid black;
    border-radius: 4px;
    color: white;
+}
+
+#contact form #submit {
+   position: absolute;
+   right: 550px;
+   bottom: 135px;
+   width: 100px;
+   height: 50px;
+   transition: all ease 1s;
+}
+
+#contact form #submit:hover {
+   background-color: black;
+   border-color: white;
 }
 
 footer {
