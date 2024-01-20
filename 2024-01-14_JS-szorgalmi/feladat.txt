@@ -1,0 +1,5 @@
+Ötös-, hatos lottó és Eurojackpot sorsolás
+
+Először is hozz létre egy html, illetve egy js file-t.
+A felhasználó 3 lehetőség közül kiválasztja melyik lottót szeretné választani.
+Js file-ban pedig a kiválasztott lottó alapján generálja a megfelelő mennyiségű számot a megfelelő tartományon belül, amiket egy listában tárol. Majd növekvő sorrendben kiírja a weboldalra egy rendezetlen listába.
