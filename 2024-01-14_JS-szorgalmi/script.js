@@ -46,9 +46,27 @@ function lotteryGenerate(lotNum, maxNum) {
             i--;
          }
       }
+      // Sort the second list
+      secRandNumsList.sort(function (a, b) {
+         return a - b;
+      });
       // Lastly add the additional number list to the main number list
       randNumsList.push(secRandNumsList);
    }
-   // Print out the result to the console
-   console.log(randNumsList);
+   // Sort the main list
+   randNumsList.sort(function (a, b) {
+      return a - b;
+   });
+   // Call the print out function
+   printOutResult(randNumsList);
+}
+
+function printOutResult(randNumsList) {
+   let resultDiv = document.getElementById("result");
+   resultDiv.innerHTML = "";
+   resultDiv.innerHTML += "<ul>";
+   for (let i = 0; i < randNumsList.length; i++) {
+      resultDiv.innerHTML += "<li>" + randNumsList[i] + "</li>";
+   }
+   resultDiv.innerHTML += "</ul>";
 }
