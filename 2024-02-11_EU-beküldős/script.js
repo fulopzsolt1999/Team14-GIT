@@ -116,35 +116,67 @@ function euData() {
    return EuropaiUnio;
 }
 
+function getPrompt(exercise) {
+   switch (exercise) {
+      case 2:
+         return prompt("Adjon meg évszámot");
+      case 3:
+         return prompt("Adjon meg egy országot");
+      case 4:
+         return Number(prompt("Adja meg egy hónap számát"));
+      default:
+         break;
+   }
+}
+
 function euMembers(euObj) {
    console.log(`${euObj.length} tagja van az EU-nak.`);
 }
 
-function members2007Join(euObj) {
-   console.log(`########## 2007-ben csatlakozott országok: ##########`);
+function membersJoin(euObj) {
+   let joinYear = getPrompt(2);
+   let membersInJoinYear = [];
    for (let i = 0; i < euObj.length; i++) {
-      if (Number(euObj[i].csatlakozas.slice(0, 4)) == 2007) {
-         console.log(euObj[i].orszag);
+      if (Number(euObj[i].csatlakozas.slice(0, 4)) == joinYear) {
+         membersInJoinYear.push(euObj[i].orszag);
       }
+   }
+   if (membersInJoinYear.length != 0) {
+      console.log(
+         `${joinYear} évben ezek az országok csatlakoztak: ${membersInJoinYear.join(", ")}`
+      );
+   } else {
+      console.log(`${joinYear} évben nem csatlakozott egy ország sem az EU-hoz.`);
    }
 }
 
-function checkHungaryMembership(euObj) {
+function checkMembership(euObj) {
+   let country = getPrompt(3);
+   let found = false;
    for (let i = 0; i < euObj.length; i++) {
-      if (euObj[i].orszag == "Magyarország") {
-         console.log("Magyarország tagja az EU-nak.");
+      if (euObj[i].orszag == country) {
+         console.log(`${country} tagja az EU-nak.`);
+         found = true;
       }
+   }
+   if (!found) {
+      console.log(`${country} nem tagja az EU-nak.`);
    }
 }
 
-function checkJoinMay(euObj) {
+function checkJoinMonth(euObj) {
+   let month = getPrompt(4);
    let count = 0;
    for (let i = 0; i < euObj.length; i++) {
-      if (Number(euObj[i].csatlakozas.slice(5, 7)) == 5) {
+      if (Number(euObj[i].csatlakozas.slice(5, 7)) == month) {
          count++;
       }
    }
-   console.log(`Igen, májusban ${count} ország csatlakozott.`);
+   if (count == 0) {
+      console.log(`${month}. hónapban nem csatlakozott egy ország sem.`);
+   } else {
+      console.log(`${month}. hónapban ${count} ország csatlakozott.`);
+   }
 }
 
 function lastJoin(euObj) {
@@ -192,8 +224,8 @@ function joinStatictics(euObj) {
 
 let euObj = euData();
 euMembers(euObj);
-members2007Join(euObj);
-checkHungaryMembership(euObj);
-checkJoinMay(euObj);
+membersJoin(euObj);
+checkMembership(euObj);
+checkJoinMonth(euObj);
 lastJoin(euObj);
 joinStatictics(euObj);
