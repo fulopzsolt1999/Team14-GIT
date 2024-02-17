@@ -26,13 +26,76 @@ function arrayToObject(csA) {
    for (let i = 0; i < csA.length; i++) {
       let teamDataObj = {
          nev: csA[i].split(";")[0],
-         helyezes: csA[i].split(";")[1],
-         valtozas: csA[i].split(";")[2],
-         pont: csA[i].split(";")[3],
+         helyezes: Number(csA[i].split(";")[1]),
+         valtozas: Number(csA[i].split(";")[2]),
+         pont: Number(csA[i].split(";")[3]),
       };
       teamsDataArray.push(teamDataObj);
    }
-   return teamsDataArray;
+   outputTeamsNum(teamsDataArray);
+   let avgPoint = avgTeamPoint(teamsDataArray);
+   getTeamsAboveAvgPoint(teamsDataArray, avgPoint);
+   getMostImprovedTeam(teamsDataArray);
+   let getTeamInp = getTeamPrompt();
+   checkTeamInList(teamsDataArray, getTeamInp);
+}
+
+function outputTeamsNum(tDA) {
+   console.log(`Aktuálisan ${tDA.length} csapat szerepel a ranglistán.`);
+}
+
+function avgTeamPoint(tDA) {
+   let allPoints = 0;
+   for (let i = 0; i < tDA.length; i++) {
+      allPoints += tDA[i].pont;
+   }
+   console.log(`A résztvevő csapatok átlagpontszáma: ${allPoints / tDA.length}`);
+   return allPoints / tDA.length;
+}
+
+function getTeamsAboveAvgPoint(tDA, aP) {
+   let outputArray = [];
+   for (let i = 0; i < tDA.length; i++) {
+      if (tDA[i].pont > aP) {
+         outputArray.push(tDA[i]);
+      }
+   }
+   console.table(outputArray);
+}
+
+function getMostImprovedTeam(tDA) {
+   let checkNum = 0;
+   let getIndex = 0;
+   for (let i = 0; i < tDA.length; i++) {
+      if (tDA[i].valtozas > checkNum) {
+         checkNum = tDA[i].valtozas;
+         getIndex = i;
+      }
+   }
+   console.log(
+      `A legtöbbet javító csapat adatai:
+      Csapat név: ${tDA[getIndex].nev},
+      Helyezés: ${tDA[getIndex].helyezes},
+      Pontszám: ${tDA[getIndex].pont}`
+   );
+}
+
+function getTeamPrompt() {
+   return prompt("Adjon meg egy tetszőleges országot");
+}
+
+function checkTeamInList(tDA, gTI) {
+   let found = false;
+   for (let i = 0; i < tDA.length; i++) {
+      if (tDA[i].nev == gTI) {
+         found = true;
+      }
+   }
+   if (found) {
+      console.log(`${gTI} csapata rajta van az aktuális ranglistán.`);
+   } else {
+      console.log(`${gTI} csapata nincs rajta az aktuális ranglistán.`);
+   }
 }
 
 arrayToObject(csapatAdat);
