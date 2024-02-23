@@ -1,34 +1,35 @@
-const csapatAdat = [
-   "Anglia;4;0;1662",
-   "Argentína;10;0;1614",
-   "Belgium;1;0;1752",
-   "Brazília;3;-1;1719",
-   "Chile;17;-3;1576",
-   "Dánia;14;-1;1584",
-   "Franciaország;2;1;1725",
-   "Hollandia;13;3;1586",
-   "Horvátország;8;-1;1625",
-   "Kolumbia;9;-1;1622",
-   "Mexikó;12;0;1603",
-   "Németország;16;-1;1580",
-   "Olaszország;15;1;1583",
-   "Peru;19;0;1551",
-   "Portugália;5;1;1643",
-   "Spanyolország;7;2;1631",
-   "Svájc;11;0;1604",
-   "Svédország;18;0;1560",
-   "Szenegál;20;0;1546",
-   "Uruguay;6;-1;1639",
-];
+arrayToObject();
 
-function arrayToObject(csA) {
+function arrayToObject() {
+   const csapatAdat = [
+      "Anglia;4;0;1662",
+      "Argentína;10;0;1614",
+      "Belgium;1;0;1752",
+      "Brazília;3;-1;1719",
+      "Chile;17;-3;1576",
+      "Dánia;14;-1;1584",
+      "Franciaország;2;1;1725",
+      "Hollandia;13;3;1586",
+      "Horvátország;8;-1;1625",
+      "Kolumbia;9;-1;1622",
+      "Mexikó;12;0;1603",
+      "Németország;16;-1;1580",
+      "Olaszország;15;1;1583",
+      "Peru;19;0;1551",
+      "Portugália;5;1;1643",
+      "Spanyolország;7;2;1631",
+      "Svájc;11;0;1604",
+      "Svédország;18;0;1560",
+      "Szenegál;20;0;1546",
+      "Uruguay;6;-1;1639",
+   ];
    const teamsDataArray = [];
-   for (let i = 0; i < csA.length; i++) {
+   for (let i = 0; i < csapatAdat.length; i++) {
       let teamDataObj = {
-         nev: csA[i].split(";")[0],
-         helyezes: Number(csA[i].split(";")[1]),
-         valtozas: Number(csA[i].split(";")[2]),
-         pont: Number(csA[i].split(";")[3]),
+         nev: csapatAdat[i].split(";")[0],
+         helyezes: Number(csapatAdat[i].split(";")[1]),
+         valtozas: Number(csapatAdat[i].split(";")[2]),
+         pont: Number(csapatAdat[i].split(";")[3]),
       };
       teamsDataArray.push(teamDataObj);
    }
@@ -38,6 +39,7 @@ function arrayToObject(csA) {
    getMostImprovedTeam(teamsDataArray);
    let getTeamInp = getTeamPrompt();
    checkTeamInList(teamsDataArray, getTeamInp);
+   pointChangeStatistics(teamsDataArray);
 }
 
 function outputTeamsNum(tDA) {
@@ -98,4 +100,14 @@ function checkTeamInList(tDA, gTI) {
    }
 }
 
-arrayToObject(csapatAdat);
+function pointChangeStatistics(tDA) {
+   let allPointChanges = [];
+   let pointChangesObj = {};
+   for (let i = 0; i < tDA.length; i++) {
+      allPointChanges.push(tDA[i].valtozas);
+   }
+   allPointChanges.forEach(function (i) {
+      pointChangesObj[i] = (pointChangesObj[i] || 0) + 1;
+   });
+   console.table(pointChangesObj);
+}
