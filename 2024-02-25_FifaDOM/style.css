@@ -1,0 +1,34 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   background-image: url("img/fifa_background.jpeg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   color: white;
+}
+
+h1 {
+   text-align: center;
+}
+
+.container {
+   width: 750px;
+}
+
+img {
+   background-color: white;
+   width: 60px;
+   height: 60px;
+   cursor: pointer;
+}
+
+.result-container {
+   width: 750px;
+   margin: 10px auto;
+   text-align: center;
+   border: 4px solid white;
+}
