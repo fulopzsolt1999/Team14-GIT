@@ -13,6 +13,7 @@ body {
 
 h1 {
    text-align: center;
+   margin: 20px;
 }
 
 .container {
@@ -27,8 +28,11 @@ img {
 }
 
 .result-container {
+   display: flex;
    width: 750px;
    margin: 10px auto;
+   padding: 15px;
    text-align: center;
-   border: 4px solid white;
+   flex-direction: column;
+   align-items: center;
 }
