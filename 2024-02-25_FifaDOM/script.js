@@ -51,9 +51,6 @@ function getData(userClick) {
          outputTeamsNum(teamsDataArray, resultContainer);
          break;
       case "average":
-         outputAverageScore(teamsDataArray, resultContainer);
-         break;
-      case "above-average":
          outputTeamsAboveAverageScore(
             teamsDataArray,
             resultContainer,
@@ -64,13 +61,10 @@ function getData(userClick) {
          outputMostImprovingTeam(teamsDataArray, resultContainer);
          break;
       case "search":
-         outputSearchTeam(teamsDataArray, resultContainer);
+         createSearchField(teamsDataArray, resultContainer);
          break;
       case "statistics":
          outputStatistics(teamsDataArray, resultContainer);
-         break;
-
-      default:
          break;
    }
 }
@@ -83,18 +77,24 @@ function outputTeamsNum(tDA, rC) {
    // --- Create table ---
    rC.appendChild(createTable(tDA));
 
-   // --- Style the container and the paragraph element
+   // --- Styling ---
    styleContainerAndParagraph(rC, p);
 }
 
 function outputAverageScore(tDA, rC) {
    let p = document.createElement("p");
    let scoreSum = 0;
+
+   // --- Sum all scores
    tDA.forEach((team) => {
       scoreSum += team.pont;
    });
    let avgScore = scoreSum / tDA.length;
+
+   // --- Show the avg score ---
    rC.appendChild(p).innerHTML = `Az átlag pontszám: ${avgScore}.`;
+
+   // --- Styling ---
    styleContainerAndParagraph(rC, p);
    return avgScore;
 }
@@ -103,13 +103,146 @@ function outputTeamsAboveAverageScore(tDA, rC, avgS) {
    let p = document.createElement("p");
    rC.appendChild(p).innerHTML = `Az átlag pontszámnál több ponttal rendelkező csapatok:`;
    let resultTeams = [];
+
+   // --- Check if the current team has more points than the avg score
    tDA.forEach((team) => {
       if (team.pont > avgS) {
          resultTeams.push(team);
       }
    });
+
+   // --- Styling ---
    styleContainerAndParagraph(rC, p);
+
+   // --- Show the result ---
    rC.appendChild(createTable(resultTeams));
+}
+
+function outputMostImprovingTeam(tDA, rC) {
+   let p = document.createElement("p");
+   let checkNum = 0;
+   let getIndex = 0;
+
+   // --- Search for the biggest improve change ---
+   for (let i = 0; i < tDA.length; i++) {
+      if (tDA[i].valtozas > checkNum) {
+         checkNum = tDA[i].valtozas;
+         getIndex = i;
+      }
+   }
+
+   // --- Show the result ---
+   rC.appendChild(p).innerHTML = `A legtöbbet javító csapat: ${tDA[getIndex].nev}`;
+
+   // --- Styling ---
+   styleContainerAndParagraph(rC, p);
+}
+
+function createSearchField(tDA, rC) {
+   // --- Create the form field and the paragraph
+   let searchForm = document.createElement("form");
+   let searchInput = document.createElement("input");
+   let searchButton = document.createElement("button");
+   let p = document.createElement("p");
+
+   // --- Adding attributes to the input field and the button
+   searchInput.type = "search";
+   searchInput.placeholder = "Enter the country";
+   searchButton.type = "submit";
+   searchButton.textContent = "Search";
+
+   // --- Show the form field and the paragraph
+   searchForm.appendChild(searchInput);
+   searchForm.appendChild(searchButton);
+   rC.appendChild(searchForm);
+   rC.appendChild(p);
+
+   searchForm.addEventListener("submit", (event) => {
+      // --- User can not press Enter just click on the button ---
+      event.preventDefault();
+
+      // --- Check if the input matches any team name inside the array
+      let found = false;
+      tDA.forEach((team) => {
+         if (team.nev === searchInput.value) {
+            found = true;
+         }
+      });
+
+      // --- Handle if the team if found or not ---
+      if (found) {
+         document.querySelector(
+            ".result-container p"
+         ).innerHTML = `${searchInput.value} csapata rajta van a top 20 listán.`;
+      } else {
+         document.querySelector(
+            ".result-container p"
+         ).innerHTML = `${searchInput.value} csapata nincs rajta a top 20 listán.`;
+      }
+
+      // --- Clear input field ---
+      searchInput.value = "";
+   });
+
+   // --- Styling ---
+   styleContainerAndParagraph(rC, p);
+}
+
+function outputStatistics(tDA, rC) {
+   let allPointChanges = [];
+   let pointChangesObj = {};
+   tDA.forEach((team) => {
+      allPointChanges.push(team.valtozas);
+   });
+   allPointChanges.forEach(function (i) {
+      pointChangesObj[i] = (pointChangesObj[i] || 0) + 1;
+   });
+
+   // --- Create a table and tbody ---
+   let table = document.createElement("table");
+   let thead = document.createElement("thead");
+   let tbody = document.createElement("tbody");
+   let tr = document.createElement("tr");
+   let p = document.createElement("p");
+
+   // --- Create header elements to make easier the read of the table
+   for (let i = 0; i < 2; i++) {
+      if (i == 0) {
+         let th = document.createElement("th");
+         th.appendChild(document.createTextNode("Változás"));
+         tr.appendChild(th);
+         thead.appendChild(tr);
+      } else {
+         let th = document.createElement("th");
+         th.appendChild(document.createTextNode("Hányszor fordult elő ekkora változás"));
+         tr.appendChild(th);
+         thead.appendChild(tr);
+      }
+   }
+
+   // --- Loop through the key value pairs
+   for (const key in pointChangesObj) {
+      let tr = document.createElement("tr");
+      let rows = [key, pointChangesObj[key]];
+      rows.forEach((row) => {
+         let td = document.createElement("td");
+         td.appendChild(document.createTextNode(`${row}`));
+         tr.appendChild(td);
+         tbody.appendChild(tr);
+         tr.style.borderBottom = "1px solid white";
+      });
+   }
+
+   // --- Show the results ---
+   p.innerHTML = "Csapat statisztika változások alapján.";
+   table.appendChild(thead);
+   table.appendChild(tbody);
+   rC.appendChild(p);
+   rC.appendChild(table);
+
+   // --- Styling ---
+   styleTable(table, thead, tbody);
+   styleContainerAndParagraph(rC, p);
 }
 
 function createTable(data) {
@@ -142,12 +275,13 @@ function createTable(data) {
             td.appendChild(document.createTextNode(`${row}`));
             tr.appendChild(td);
             tbody.appendChild(tr);
+            tr.style.borderBottom = "1px solid white";
          });
          table.appendChild(tbody);
       }
    }
 
-   // --- Table styling ---
+   // --- Styling ---
    styleTable(table, thead, tbody);
 
    return table;
