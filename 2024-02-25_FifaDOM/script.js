@@ -158,7 +158,7 @@ function createSearchField(tDA, rC) {
    rC.appendChild(p);
 
    searchForm.addEventListener("submit", (event) => {
-      // --- User can not press Enter just click on the button ---
+      // --- User can press Enter but no page load again ---
       event.preventDefault();
 
       // --- Check if the input matches any team name inside the array
@@ -186,6 +186,15 @@ function createSearchField(tDA, rC) {
 
    // --- Styling ---
    styleContainerAndParagraph(rC, p);
+   searchForm.style.display = "flex";
+   searchForm.style.flexDirection = "row";
+   searchInput.style.color = "white";
+   searchInput.style.border = "1px solid white";
+   searchInput.style.borderRadius = "6px";
+   searchButton.style.height = "41px";
+   searchButton.style.marginTop = "7.5px";
+   searchInput.setAttribute("class", "form-control-plaintext p-2 m-2");
+   searchButton.setAttribute("class", "btn btn-primary");
 }
 
 function outputStatistics(tDA, rC) {
@@ -229,7 +238,6 @@ function outputStatistics(tDA, rC) {
          td.appendChild(document.createTextNode(`${row}`));
          tr.appendChild(td);
          tbody.appendChild(tr);
-         tr.style.borderBottom = "1px solid white";
       });
    }
 
@@ -250,35 +258,32 @@ function createTable(data) {
    let table = document.createElement("table");
    let thead = document.createElement("thead");
    let tbody = document.createElement("tbody");
+   let tr = document.createElement("tr");
+
+   // --- Adding the head elements ---
+   let keysFromObj = Object.keys(data[0]);
+   keysFromObj.forEach((key) => {
+      let th = document.createElement("th");
+      th.appendChild(document.createTextNode(`${key}`));
+      tr.appendChild(th);
+      thead.appendChild(tr);
+   });
+   table.appendChild(thead);
 
    // --- Add elements to the table ---
    for (let i = 0; i < data.length; i++) {
       let tr = document.createElement("tr");
       let rows = [];
 
-      // --- Adding the head elements ---
-      if (i == 0) {
-         let keysFromObj = Object.keys(data[0]);
-         keysFromObj.forEach((key) => {
-            let th = document.createElement("th");
-            th.appendChild(document.createTextNode(`${key}`));
-            tr.appendChild(th);
-            thead.appendChild(tr);
-         });
-         table.appendChild(thead);
-
-         // --- Adding the body elements ---
-      } else {
-         rows.push(data[i].nev, data[i].helyezes, data[i].valtozas, data[i].pont);
-         rows.forEach((row) => {
-            let td = document.createElement("td");
-            td.appendChild(document.createTextNode(`${row}`));
-            tr.appendChild(td);
-            tbody.appendChild(tr);
-            tr.style.borderBottom = "1px solid white";
-         });
-         table.appendChild(tbody);
-      }
+      // --- Adding the body elements ---
+      rows.push(data[i].nev, data[i].helyezes, data[i].valtozas, data[i].pont);
+      rows.forEach((row) => {
+         let td = document.createElement("td");
+         td.appendChild(document.createTextNode(`${row}`));
+         tr.appendChild(td);
+         tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
    }
 
    // --- Styling ---
@@ -288,19 +293,20 @@ function createTable(data) {
 }
 
 function styleContainerAndParagraph(rC, p) {
-   rC.style.border = "2px solid white";
    p.style.fontSize = "24px";
    p.style.fontWeight = "bold";
    p.style.textDecoration = "underline";
 }
 
 function styleTable(t, tH, tB) {
-   t.style.width = "600px";
+   t.setAttribute("class", "table table-striped table-dark table-hover table-sm");
+   t.style.width = "70%";
+   /* t.style.width = "600px";
    t.style.borderTop = "4px solid white";
    tH.style.textTransform = "uppercase";
    tH.style.fontSize = "20px";
    tH.style.borderBottom = "1px solid white";
-   tB.style.fontSize = "18px";
+   tB.style.fontSize = "18px"; */
 }
 
 function clearContainer(rC) {

@@ -16,31 +16,52 @@ h1 {
    margin: 20px;
 }
 
-.container {
-}
-
 .row {
+   height: 150px;
    justify-content: center;
    align-items: center;
+   text-align: center;
 }
 
 img {
+   margin-bottom: 5px;
    background-color: white;
    width: 60px;
    height: 60px;
    cursor: pointer;
+   transition: all ease 2s;
+}
+
+img:hover {
+   width: 100px;
+   height: 100px;
 }
 
 .result-container {
    display: flex;
-   width: 750px;
    margin: 10px auto;
-   padding: 15px;
    text-align: center;
    flex-direction: column;
    align-items: center;
 }
 
-#form {
-   display: none;
+@media screen and (max-width: 550px) {
+   h1 {
+      text-align: right;
+   }
+}
+@media screen and (max-width: 475px) {
+   h1 {
+      font-size: 28px;
+   }
+}
+@media screen and (max-width: 420px) {
+   h1 {
+      font-size: 26px;
+   }
+}
+@media screen and (max-width: 390px) {
+   h1 {
+      font-size: 24px;
+   }
 }
