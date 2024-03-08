@@ -29,12 +29,12 @@ img {
    width: 60px;
    height: 60px;
    cursor: pointer;
-   transition: all ease 2s;
+   transition: all ease 0.4s;
 }
 
 img:hover {
-   width: 100px;
-   height: 100px;
+   width: 70px;
+   height: 70px;
 }
 
 .result-container {
@@ -45,14 +45,28 @@ img:hover {
    align-items: center;
 }
 
-@media screen and (max-width: 550px) {
-   h1 {
-      text-align: right;
-   }
-}
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 575px) {
    h1 {
       font-size: 28px;
+      text-align: right;
+   }
+   img {
+      width: 50px;
+      height: 50px;
+   }
+   img:hover {
+      width: 60px;
+      height: 60px;
+   }
+}
+@media screen and (max-width: 500px) {
+   img {
+      width: 40px;
+      height: 40px;
+   }
+   img:hover {
+      width: 50px;
+      height: 50px;
    }
 }
 @media screen and (max-width: 420px) {
@@ -60,8 +74,16 @@ img:hover {
       font-size: 26px;
    }
 }
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 400px) {
    h1 {
       font-size: 24px;
+   }
+   img {
+      width: 30px;
+      height: 30px;
+   }
+   img:hover {
+      width: 40px;
+      height: 40px;
    }
 }
