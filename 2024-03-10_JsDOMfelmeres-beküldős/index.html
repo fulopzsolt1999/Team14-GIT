@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hu">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <style>
+         .exercise01 {
+            display: flex;
+            flex-direction: row;
+         }
+
+         #inp01 {
+            margin-right: 50px;
+         }
+
+         #rajz-terulet {
+            float: right;
+            width: 100%;
+            height: 100%;
+            position: relative; /* Needed for absolute positioning */
+         }
+
+         .rajzolt-negyzet {
+            width: 100px;
+            height: 100px;
+            background-color: #000;
+            position: absolute; /* Absolute positioning within rajz-terület */
+            display: none; /* Initially hide the square */
+         }
+
+         .exercise03 img {
+            position: absolute;
+            opacity: 0;
+         }
+      </style>
+   </head>
+   <body>
+      <h3>Input hossz kiiratás</h3>
+      <div class="exercise01">
+         <input type="text" id="inp01" onkeyup="showInputLength()" />
+         <p id="karaterszam"></p>
+      </div>
+
+      <hr />
+
+      <div class="exercise02">
+         <h3>Négyzet kirajzolás</h3>
+         <input type="number" id="x-beviteli-mezo" class="beviteli-mezo" value="100" />
+         <input type="number" id="y-beviteli-mezo" class="beviteli-mezo" value="100" />
+         <button id="kirajzol-gomb" class="kirajzol-gomb">Kirajzolás</button>
+         <div id="rajz-terulet">
+            <div id="rajzolt-negyzet" class="rajzolt-negyzet"></div>
+         </div>
+      </div>
+
+      <hr />
+
+      <h3>Itt a cica hol a cica.</h3>
+      <div class="exercise03">
+         <button type="button" id="show-hide">Show/Hide</button>
+         <img src="hidingCat.jpg" width="100px" height="100px" id="cat" />
+      </div>
+
+      <hr />
+
+      <h3>Hibaüzenetek</h3>
+      <div class="exercise04">
+         <div class="error-messages"></div>
+         <label for="email">Email:</label>
+         <input type="email" name="email" id="email" />
+         <label for="email-again">Email megerősítés:</label>
+         <input type="email" name="email-again" id="email-again" />
+         <button type="button" id="email-check">Ellenőrzés</button>
+      </div>
+      <script src="script.js"></script>
+   </body>
+</html>
