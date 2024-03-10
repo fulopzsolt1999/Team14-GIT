@@ -58,4 +58,46 @@ document.querySelector("#show-hide").addEventListener("click", () => {
    }
 });
 
-document.querySelector("#email-check").addEventListener("click", () => {});
+document.querySelector("#email-check").addEventListener("click", () => {
+   const email = document.querySelector("#email").value;
+   const emailAgain = document.querySelector("#email-again").value;
+   const errorMessages = document.querySelector(".error-messages");
+   let checkErrors = false;
+   errorMessages.innerHTML = "";
+
+   if (!email && !emailAgain) {
+      errorMessages.innerHTML += "<li>Nincs kitöltve egyik mező sem!</li>";
+      checkErrors = true;
+   }
+   if (!email && emailAgain) {
+      errorMessages.innerHTML += "<li>Nincs kitöltve az email mező!</li>";
+      checkErrors = true;
+   } else if (email && !emailAgain) {
+      errorMessages.innerHTML += "<li>Nincs kitöltve az email megerősítése mező!</li>";
+      checkErrors = true;
+   }
+   if (!validEmail(email)) {
+      errorMessages.innerHTML += "<li>Nem megfelelő az e-mail cím formátuma!</li>";
+      checkErrors = true;
+   }
+   if (email !== emailAgain) {
+      errorMessages.innerHTML += "<li>A két mező tartalma nem egyezik!</li>";
+      checkErrors = true;
+   }
+   if (!checkErrors) {
+      errorMessages.innerHTML += "<li>Adatok rögzítése sikeres!</li>";
+      errorMessages.style.backgroundColor = "green";
+   } else {
+      errorMessages.style.backgroundColor = "red";
+   }
+
+   function validEmail(vizsgalandoEmail) {
+      let minta = /^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i;
+      if (minta.test(vizsgalandoEmail)) {
+         //==true val
+         return true;
+      } else {
+         return false;
+      }
+   }
+});
