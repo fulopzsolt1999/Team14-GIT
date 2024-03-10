@@ -62,42 +62,30 @@ document.querySelector("#email-check").addEventListener("click", () => {
    const email = document.querySelector("#email");
    const emailAgain = document.querySelector("#email-again");
    const errorMessages = document.querySelector(".error-messages");
-   let checkErrors = false;
    errorMessages.innerHTML = "";
 
    if (!email.value && !emailAgain.value) {
       errorMessages.innerHTML += "<li>Nincs kitöltve egyik mező sem!</li>";
       email.style.border = "1px solid red";
       emailAgain.style.border = "1px solid red";
-      checkErrors = true;
-   }
-   if (!email.value && emailAgain.value) {
+   } else if (!email.value && emailAgain.value) {
       errorMessages.innerHTML += "<li>Nincs kitöltve az email mező!</li>";
       email.style.border = "1px solid red";
-      checkErrors = true;
    } else if (email.value && !emailAgain.value) {
       errorMessages.innerHTML += "<li>Nincs kitöltve az email megerősítése mező!</li>";
       emailAgain.style.border = "1px solid red";
-      checkErrors = true;
-   }
-   if (!validEmail(email.value)) {
+   } else if (!validEmail(email.value)) {
       errorMessages.innerHTML += "<li>Nem megfelelő az e-mail cím formátuma!</li>";
       email.style.border = "1px solid red";
-      checkErrors = true;
-   }
-   if (email.value !== emailAgain.value) {
+   } else if (email.value !== emailAgain.value) {
       errorMessages.innerHTML += "<li>A két mező tartalma nem egyezik!</li>";
       email.style.border = "1px solid red";
       emailAgain.style.border = "1px solid red";
-      checkErrors = true;
-   }
-   if (!checkErrors) {
+   } else {
       errorMessages.innerHTML += "<li>Adatok rögzítése sikeres!</li>";
       email.style.border = "1px solid green";
       emailAgain.style.border = "1px solid green";
       errorMessages.style.color = "green";
-   } else {
-      errorMessages.style.color = "red";
    }
 
    function validEmail(vizsgalandoEmail) {
