@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+         crossorigin="anonymous" />
+      <title>Document</title>
+   </head>
+   <body>
+      <div class="container">
+         <h1>JS DOM számonkérés</h1>
+         <div class="first">
+            <div class="question">
+               <h3>1. Hány képviselőjelölt indult a helyhatósági választáson?</h3>
+               <button
+                  class="btn btn-primary"
+                  id="first-btn"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#first-answer"
+                  aria-expanded="false"
+                  aria-controls="first-answer">
+                  Mutasd/Rejtsd el
+               </button>
+            </div>
+            <div class="collapse multi-collapse" id="first-answer"></div>
+         </div>
+         <div class="second">
+            <div class="question">
+               <h3>
+                  2. Készítsen egy legördülő menüt, amiben kiválaszthatunk egy pártot, vagy a
+                  független jelzőt, és a választás után lekérdezhetjük, az adott párt/függetlenként
+                  hány képviselőt indított a választáson.
+               </h3>
+               <button
+                  class="btn btn-primary"
+                  id="second-btn"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#second-answer"
+                  aria-expanded="false"
+                  aria-controls="second-answer">
+                  Mutasd/Rejtsd el
+               </button>
+            </div>
+            <div class="collapse multi-collapse" id="second-answer"></div>
+         </div>
+         <div class="third">
+            <div class="question">
+               <h3>
+                  3. Kérje be egy képviselőjelölt vezetéknevét és utónevét, majd írja ki a
+                  képernyőre, hogyaz illető hány szavazatot kapott!
+               </h3>
+               <button
+                  class="btn btn-primary"
+                  id="third-btn"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#third-answer"
+                  aria-expanded="false"
+                  aria-controls="third-answer">
+                  Mutasd/Rejtsd el
+               </button>
+            </div>
+            <div class="collapse multi-collapse" id="third-answer"></div>
+         </div>
+         <div class="fourth">
+            <div class="question">
+               <h3>
+                  4. Határozza meg, hányan adták le szavazatukat, és mennyi volt a részvételi arány!
+               </h3>
+               <button
+                  class="btn btn-primary"
+                  id="fourth-btn"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#fourth-answer"
+                  aria-expanded="false"
+                  aria-controls="fourth-answer">
+                  Mutasd/Rejtsd el
+               </button>
+            </div>
+            <div class="collapse multi-collapse" id="fourth-answer"></div>
+         </div>
+         <div class="fifth">
+            <div class="question">
+               <h3>
+                  5. Határozza meg és írassa ki táblázatos formában, Bootstrap segítségével, az
+                  adott pártokra leadott szavazatok mennyiségét.
+               </h3>
+               <button
+                  class="btn btn-primary"
+                  id="fifth-btn"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#fifth-answer"
+                  aria-expanded="false"
+                  aria-controls="fifth-answer">
+                  Mutasd/Rejtsd el
+               </button>
+            </div>
+            <div class="collapse multi-collapse" id="fifth-answer"></div>
+         </div>
+         <div class="sixth">
+            <div class="question">
+               <h3> 6. Melyik jelölt kapta a legtöbb szavazatot? </h3>
+               <button
+                  class="btn btn-primary"
+                  id="sixth-btn"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#sixth-answer"
+                  aria-expanded="false"
+                  aria-controls="sixth-answer">
+                  Mutasd/Rejtsd el
+               </button>
+            </div>
+            <div class="collapse multi-collapse" id="sixth-answer"></div>
+         </div>
+         <div class="seventh">
+            <div class="question">
+               <h3>
+                  7. Határozza meg, hogy az egyes választókerületekben kik lettek a képviselők!
+               </h3>
+               <button
+                  class="btn btn-primary"
+                  id="seventh-btn"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#seventh-answer"
+                  aria-expanded="false"
+                  aria-controls="seventh-answer">
+                  Mutasd/Rejtsd el
+               </button>
+            </div>
+            <div class="collapse multi-collapse" id="seventh-answer"></div>
+         </div>
+      </div>
+      <script src="szavazatok.js"></script>
+      <script
+         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+         crossorigin="anonymous"></script>
+   </body>
+</html>
