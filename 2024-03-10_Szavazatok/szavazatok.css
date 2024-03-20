@@ -1,0 +1,16 @@
+.inner-container {
+   margin: 20px 0;
+   padding: 20px 20px 0 20px;
+   border: 2px solid black;
+   border-radius: 10px;
+}
+
+.btn {
+   width: 50%;
+   margin-left: 450px;
+   margin-bottom: 10px;
+}
+
+h3 {
+   margin-bottom: 20px;
+}

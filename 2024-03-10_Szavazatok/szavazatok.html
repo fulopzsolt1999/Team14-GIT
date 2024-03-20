@@ -8,14 +8,16 @@
          rel="stylesheet"
          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
          crossorigin="anonymous" />
+      <link rel="stylesheet" href="szavazatok.css" />
       <title>Document</title>
    </head>
    <body>
       <div class="container">
          <h1>JS DOM számonkérés</h1>
-         <div class="first">
-            <div class="question">
+         <div class="container inner-container">
+            <div class="row">
                <h3>1. Hány képviselőjelölt indult a helyhatósági választáson?</h3>
+               <div class="collapse multi-collapse" id="first-answer"></div>
                <button
                   class="btn btn-primary"
                   id="first-btn"
@@ -27,15 +29,15 @@
                   Mutasd/Rejtsd el
                </button>
             </div>
-            <div class="collapse multi-collapse" id="first-answer"></div>
          </div>
-         <div class="second">
-            <div class="question">
+         <div class="container inner-container">
+            <div class="row">
                <h3>
                   2. Készítsen egy legördülő menüt, amiben kiválaszthatunk egy pártot, vagy a
                   független jelzőt, és a választás után lekérdezhetjük, az adott párt/függetlenként
                   hány képviselőt indított a választáson.
                </h3>
+               <div class="collapse multi-collapse" id="second-answer"></div>
                <button
                   class="btn btn-primary"
                   id="second-btn"
@@ -47,14 +49,14 @@
                   Mutasd/Rejtsd el
                </button>
             </div>
-            <div class="collapse multi-collapse" id="second-answer"></div>
          </div>
-         <div class="third">
-            <div class="question">
+         <div class="container inner-container">
+            <div class="row">
                <h3>
                   3. Kérje be egy képviselőjelölt vezetéknevét és utónevét, majd írja ki a
-                  képernyőre, hogyaz illető hány szavazatot kapott!
+                  képernyőre, hogy az illető hány szavazatot kapott!
                </h3>
+               <div class="collapse multi-collapse" id="third-answer"></div>
                <button
                   class="btn btn-primary"
                   id="third-btn"
@@ -66,13 +68,13 @@
                   Mutasd/Rejtsd el
                </button>
             </div>
-            <div class="collapse multi-collapse" id="third-answer"></div>
          </div>
-         <div class="fourth">
-            <div class="question">
+         <div class="container inner-container">
+            <div class="row">
                <h3>
                   4. Határozza meg, hányan adták le szavazatukat, és mennyi volt a részvételi arány!
                </h3>
+               <div class="collapse multi-collapse" id="fourth-answer"></div>
                <button
                   class="btn btn-primary"
                   id="fourth-btn"
@@ -84,14 +86,14 @@
                   Mutasd/Rejtsd el
                </button>
             </div>
-            <div class="collapse multi-collapse" id="fourth-answer"></div>
          </div>
-         <div class="fifth">
-            <div class="question">
+         <div class="container inner-container">
+            <div class="row">
                <h3>
                   5. Határozza meg és írassa ki táblázatos formában, Bootstrap segítségével, az
                   adott pártokra leadott szavazatok mennyiségét.
                </h3>
+               <div class="collapse multi-collapse" id="fifth-answer"></div>
                <button
                   class="btn btn-primary"
                   id="fifth-btn"
@@ -103,11 +105,11 @@
                   Mutasd/Rejtsd el
                </button>
             </div>
-            <div class="collapse multi-collapse" id="fifth-answer"></div>
          </div>
-         <div class="sixth">
-            <div class="question">
-               <h3> 6. Melyik jelölt kapta a legtöbb szavazatot? </h3>
+         <div class="container inner-container">
+            <div class="row">
+               <h3>6. Melyik jelölt kapta a legtöbb szavazatot?</h3>
+               <div class="collapse multi-collapse" id="sixth-answer"></div>
                <button
                   class="btn btn-primary"
                   id="sixth-btn"
@@ -119,13 +121,13 @@
                   Mutasd/Rejtsd el
                </button>
             </div>
-            <div class="collapse multi-collapse" id="sixth-answer"></div>
          </div>
-         <div class="seventh">
-            <div class="question">
+         <div class="container inner-container">
+            <div class="row">
                <h3>
                   7. Határozza meg, hogy az egyes választókerületekben kik lettek a képviselők!
                </h3>
+               <div class="collapse multi-collapse" id="seventh-answer"></div>
                <button
                   class="btn btn-primary"
                   id="seventh-btn"
@@ -137,7 +139,6 @@
                   Mutasd/Rejtsd el
                </button>
             </div>
-            <div class="collapse multi-collapse" id="seventh-answer"></div>
          </div>
       </div>
       <script src="szavazatok.js"></script>

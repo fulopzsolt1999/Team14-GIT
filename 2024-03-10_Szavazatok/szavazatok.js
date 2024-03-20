@@ -53,6 +53,18 @@ function questionSelectorFunc(questionNumber) {
    return document.querySelector(`#${questionNumber}-answer`);
 }
 
+function addChildElements(parent, child) {
+   parent.appendChild(child);
+}
+
+function countSameElements(list) {
+   const counts = {};
+   list.forEach(function (x) {
+      counts[x] = (counts[x] || 0) + 1;
+   });
+   return counts;
+}
+
 function KepviselokSzama(szavazatok) {
    const firstAnswerContainer = questionSelectorFunc("first");
    let p = document.createElement("p");
@@ -63,7 +75,13 @@ function KepviselokSzama(szavazatok) {
 function PartKepviselok(szavazatok) {
    const secondAnswerContainer = questionSelectorFunc("second");
    let partokList = [];
-   let select = document.createElement("select");
+   let allVotes = [];
+   const select = document.createElement("select");
+   const option = document.createElement("option");
+   const p = document.createElement("p");
+   option.innerHTML = "Válassz";
+   option.value = "0";
+   select.appendChild(option);
    szavazatok.forEach((line) => {
       if (!partokList.includes(line.part)) {
          let option = document.createElement("option");
@@ -72,9 +90,19 @@ function PartKepviselok(szavazatok) {
          partokList.push(line.part);
          select.appendChild(option);
       }
+      allVotes.push(line.part);
    });
-   secondAnswerContainer.appendChild(select);
+   const countParts = countSameElements(allVotes);
+   select.addEventListener("change", () => {
+      let selectedOpt = document.querySelector("select").value;
+      if (selectedOpt !== "0") {
+         p.innerHTML = `A kiválasztott (${selectedOpt}) párt ${countParts[selectedOpt]} képviselőt indított.`;
+      }
+   });
+   addChildElements(secondAnswerContainer, select);
+   addChildElements(secondAnswerContainer, p);
 }
+
 function KepviseloInfo(szavazatok) {
    const thirdAnswerContainer = questionSelectorFunc("third");
 }
