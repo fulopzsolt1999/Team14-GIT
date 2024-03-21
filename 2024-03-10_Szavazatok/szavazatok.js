@@ -76,10 +76,6 @@ function clearInnerHtml(elem) {
    elem.innerHTML = "";
 }
 
-function addChildElements(parent, child) {
-   parent.appendChild(child);
-}
-
 function styleElements(obj) {}
 
 function countSameElements(data) {
@@ -92,7 +88,7 @@ function countSameElements(data) {
 
 function KepviselokSzama(sz, oD, p) {
    p.innerHTML = `A helyhatósági választáson ${sz.length} képviselőjelölt indult.`;
-   addChildElements(oD, p);
+   oD.appendChild(p);
 }
 
 function PartKepviselok(sz, oD, p) {
@@ -120,10 +116,11 @@ function PartKepviselok(sz, oD, p) {
          p.innerHTML = `A kiválasztott (${selectedOpt}) párt ${countParts[selectedOpt]} képviselőt indított.`;
       }
    });
-   addChildElements(oD, select);
-   addChildElements(oD, p);
+   oD.appendChild(select);
+   oD.appendChild(p);
    select.classList.add("form-select", "m-4");
-   select.style.width = "12vh";
+   select.style.maxWidth = "12vw";
+   select.style.minWidth = "100px";
 }
 
 function KepviseloInfo(sz, oD, p) {
@@ -133,9 +130,9 @@ function KepviseloInfo(sz, oD, p) {
    inputSpan.innerHTML = "Vezetéknév és Keresztnév";
    input.setAttribute("type", "text");
 
-   addChildElements(formDiv, inputSpan);
-   addChildElements(formDiv, input);
-   addChildElements(oD, formDiv);
+   formDiv.appendChild(inputSpan);
+   formDiv.appendChild(input);
+   oD.appendChild(formDiv);
 
    formDiv.classList.add("input-group");
    inputSpan.classList.add("input-group-text");
@@ -153,7 +150,7 @@ function KepviseloInfo(sz, oD, p) {
          p.innerHTML = "Ilyen nevű képviselőjelölt nem szerepel a nyilvántartásban!";
       }
       input.value = "";
-      addChildElements(oD, p);
+      oD.appendChild(p);
    });
 }
 
@@ -166,7 +163,7 @@ function SzavazatokAranya(sz, jSz, oD, p) {
       (votesSum / jSz) *
       100
    ).toFixed(2)}%-a vett részt.`;
-   addChildElements(oD, p);
+   oD.appendChild(p);
 }
 function SzavazatokMennyisege(sz, oD, p) {
    let partokList = [];
@@ -178,44 +175,70 @@ function SzavazatokMennyisege(sz, oD, p) {
    });
    for (let i = 0; i < partokList.length; i++) {
       let voteCounter = 0;
+      votesToParts.push({part_nev: partokList[i], all_votes: voteCounter});
       sz.forEach((line) => {
-         if (partokList[i] == line.part) {
+         if (votesToParts[i].part_nev == line.part) {
             voteCounter += line.szavazat;
-            votesToParts.push({part_nev: line.part, all_votes: voteCounter});
+            votesToParts[i].all_votes = voteCounter;
          }
       });
-      console.log(votesToParts);
    }
-
    createTable(oD, votesToParts);
 }
 
 function createTable(oD, data) {
    // --- Create a table with thead and tbody ---
-   let table = document.createElement("table");
-   let thead = document.createElement("thead");
-   let tbody = document.createElement("tbody");
-   let tr = document.createElement("tr");
+   const table = document.createElement("table");
+   const thead = document.createElement("thead");
+   const tbody = document.createElement("tbody");
+   const tr = document.createElement("tr");
 
    // --- Adding the head elements ---
+   const tableHeaders = ["Pártok", "Összesített szavazatok"];
+   for (let i = 0; i < tableHeaders.length; i++) {
+      const th = document.createElement("th");
+      th.appendChild(document.createTextNode(`${tableHeaders[i]}`));
+      tr.appendChild(th);
+      thead.appendChild(tr);
+   }
 
    // --- Add elements to the table ---
    for (let i = 0; i < data.length; i++) {
-      let tr = document.createElement("tr");
+      const tr = document.createElement("tr");
       let rows = [];
 
       // --- Adding the body elements ---
       rows.push(data[i].part_nev, data[i].all_votes);
       rows.forEach((row) => {
-         let td = document.createElement("td");
+         const td = document.createElement("td");
          td.appendChild(document.createTextNode(`${row}`));
          tr.appendChild(td);
          tbody.appendChild(tr);
       });
+      table.appendChild(thead);
       table.appendChild(tbody);
    }
-   addChildElements(oD, table);
+   oD.appendChild(table);
+   table.setAttribute(
+      "class",
+      "table table-striped table-dark table-hover table-sm m-auto mt-4 mb-4 align-middle"
+   );
+   table.style.width = "80%";
 }
 
-function LegtobbSzavazat(sz, oD, p) {}
+function LegtobbSzavazat(sz, oD, p) {
+   let mostVoteNumber = 0;
+   sz.forEach((line) => {
+      if (line.szavazat > mostVoteNumber) {
+         mostVoteNumber = line.szavazat;
+      }
+   });
+   p.innerHTML = `A választáson elért legtöbb szavazat: ${mostVoteNumber}`;
+   sz.forEach((line) => {
+      if (line.szavazat == mostVoteNumber) {
+         p.innerHTML += `<br>${line.nev} - ${line.part} `;
+      }
+   });
+   oD.appendChild(p);
+}
 function Nyertesek(sz, oD, p) {}
