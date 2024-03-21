@@ -241,4 +241,12 @@ function LegtobbSzavazat(sz, oD, p) {
    });
    oD.appendChild(p);
 }
-function Nyertesek(sz, oD, p) {}
+function Nyertesek(sz, oD, p) {
+   let votePlaces = [];
+   let voteCheck = 0;
+   sz.forEach((line) => {
+      if (!votePlaces.includes(line.korzet)) {
+         votePlaces.push(line.korzet);
+      }
+   });
+}
