@@ -12,134 +12,49 @@
       <title>Document</title>
    </head>
    <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <div class="container-fluid">
+            <a class="navbar-brand" href="#">Feladat választó</a>
+            <button
+               class="navbar-toggler"
+               type="button"
+               data-bs-toggle="collapse"
+               data-bs-target="#navbarNav"
+               aria-controls="navbarNav"
+               aria-expanded="false"
+               aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav">
+                  <li class="nav-item">
+                     <a class="nav-link" href="#" onclick="getData(1)"> 1. Feladat </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#" onclick="getData(2)">2. Feladat</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#" onclick="getData(3)">3. Feladat</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#" onclick="getData(4)">4. Feladat</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#" onclick="getData(5)">5. Feladat</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#" onclick="getData(6)">6. Feladat</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#" onclick="getData(7)">7. Feladat</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
       <div class="container">
          <h1>JS DOM számonkérés</h1>
-         <div class="container inner-container">
-            <div class="row">
-               <h3>1. Hány képviselőjelölt indult a helyhatósági választáson?</h3>
-               <div class="collapse multi-collapse" id="first-answer"></div>
-               <button
-                  class="btn btn-primary"
-                  id="first-btn"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#first-answer"
-                  aria-expanded="false"
-                  aria-controls="first-answer">
-                  Mutasd/Rejtsd el
-               </button>
-            </div>
-         </div>
-         <div class="container inner-container">
-            <div class="row">
-               <h3>
-                  2. Készítsen egy legördülő menüt, amiben kiválaszthatunk egy pártot, vagy a
-                  független jelzőt, és a választás után lekérdezhetjük, az adott párt/függetlenként
-                  hány képviselőt indított a választáson.
-               </h3>
-               <div class="collapse multi-collapse" id="second-answer"></div>
-               <button
-                  class="btn btn-primary"
-                  id="second-btn"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#second-answer"
-                  aria-expanded="false"
-                  aria-controls="second-answer">
-                  Mutasd/Rejtsd el
-               </button>
-            </div>
-         </div>
-         <div class="container inner-container">
-            <div class="row">
-               <h3>
-                  3. Kérje be egy képviselőjelölt vezetéknevét és utónevét, majd írja ki a
-                  képernyőre, hogy az illető hány szavazatot kapott!
-               </h3>
-               <div class="collapse multi-collapse" id="third-answer"></div>
-               <button
-                  class="btn btn-primary"
-                  id="third-btn"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#third-answer"
-                  aria-expanded="false"
-                  aria-controls="third-answer">
-                  Mutasd/Rejtsd el
-               </button>
-            </div>
-         </div>
-         <div class="container inner-container">
-            <div class="row">
-               <h3>
-                  4. Határozza meg, hányan adták le szavazatukat, és mennyi volt a részvételi arány!
-               </h3>
-               <div class="collapse multi-collapse" id="fourth-answer"></div>
-               <button
-                  class="btn btn-primary"
-                  id="fourth-btn"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#fourth-answer"
-                  aria-expanded="false"
-                  aria-controls="fourth-answer">
-                  Mutasd/Rejtsd el
-               </button>
-            </div>
-         </div>
-         <div class="container inner-container">
-            <div class="row">
-               <h3>
-                  5. Határozza meg és írassa ki táblázatos formában, Bootstrap segítségével, az
-                  adott pártokra leadott szavazatok mennyiségét.
-               </h3>
-               <div class="collapse multi-collapse" id="fifth-answer"></div>
-               <button
-                  class="btn btn-primary"
-                  id="fifth-btn"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#fifth-answer"
-                  aria-expanded="false"
-                  aria-controls="fifth-answer">
-                  Mutasd/Rejtsd el
-               </button>
-            </div>
-         </div>
-         <div class="container inner-container">
-            <div class="row">
-               <h3>6. Melyik jelölt kapta a legtöbb szavazatot?</h3>
-               <div class="collapse multi-collapse" id="sixth-answer"></div>
-               <button
-                  class="btn btn-primary"
-                  id="sixth-btn"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#sixth-answer"
-                  aria-expanded="false"
-                  aria-controls="sixth-answer">
-                  Mutasd/Rejtsd el
-               </button>
-            </div>
-         </div>
-         <div class="container inner-container">
-            <div class="row">
-               <h3>
-                  7. Határozza meg, hogy az egyes választókerületekben kik lettek a képviselők!
-               </h3>
-               <div class="collapse multi-collapse" id="seventh-answer"></div>
-               <button
-                  class="btn btn-primary"
-                  id="seventh-btn"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#seventh-answer"
-                  aria-expanded="false"
-                  aria-controls="seventh-answer">
-                  Mutasd/Rejtsd el
-               </button>
-            </div>
-         </div>
+         <div id="output" class="text-center align-middle"></div>
       </div>
       <script src="szavazatok.js"></script>
       <script

@@ -41,21 +41,47 @@ const szavazatok = [
    {korzet: 5, szavazat: 68, nev: "Vagdalt Edit", part: "HEP"},
 ];
 
-document.querySelector("#first-btn").addEventListener("click", KepviselokSzama(szavazatok));
-document.querySelector("#second-btn").addEventListener("click", PartKepviselok(szavazatok));
-document.querySelector("#third-btn").addEventListener("click", KepviseloInfo(szavazatok));
-document.querySelector("#fourth-btn").addEventListener("click", SzavazatokAranya(szavazatok));
-document.querySelector("#fifth-btn").addEventListener("click", SzavazatokMennyisege(szavazatok));
-document.querySelector("#sixth-btn").addEventListener("click", LegtobbSzavazat(szavazatok));
-document.querySelector("#seventh-btn").addEventListener("click", Nyertesek(szavazatok));
+function getData(exerciseNumber) {
+   const outputDiv = document.querySelector("#output");
+   const paragraphElem = document.createElement("p");
+   outputDiv.classList.add("border", "border-dark", "rounded-3");
+   paragraphElem.classList.add("fw-bold", "fs-3", "m-5");
+   clearOutputDiv(outputDiv);
+   switch (exerciseNumber) {
+      case 1:
+         KepviselokSzama(szavazatok, outputDiv, paragraphElem);
 
-function questionSelectorFunc(questionNumber) {
-   return document.querySelector(`#${questionNumber}-answer`);
+         break;
+      case 2:
+         PartKepviselok(szavazatok, outputDiv, paragraphElem);
+         break;
+      case 3:
+         KepviseloInfo(szavazatok, outputDiv, paragraphElem);
+         break;
+      case 4:
+         SzavazatokAranya(szavazatok, outputDiv, paragraphElem);
+         break;
+      case 5:
+         SzavazatokMennyisege(szavazatok, outputDiv, paragraphElem);
+         break;
+      case 6:
+         LegtobbSzavazat(szavazatok, outputDiv, paragraphElem);
+         break;
+      case 7:
+         Nyertesek(szavazatok, outputDiv, paragraphElem);
+         break;
+   }
+}
+
+function clearOutputDiv(oD) {
+   oD.innerHTML = "";
 }
 
 function addChildElements(parent, child) {
    parent.appendChild(child);
 }
+
+function styleElements(obj) {}
 
 function countSameElements(list) {
    const counts = {};
@@ -65,24 +91,20 @@ function countSameElements(list) {
    return counts;
 }
 
-function KepviselokSzama(szavazatok) {
-   const firstAnswerContainer = questionSelectorFunc("first");
-   let p = document.createElement("p");
-   p.innerHTML = `A helyhatósági választáson ${szavazatok.length} képviselőjelölt indult.`;
-   firstAnswerContainer.appendChild(p);
+function KepviselokSzama(sz, oD, p) {
+   p.innerHTML = `A helyhatósági választáson ${sz.length} képviselőjelölt indult.`;
+   addChildElements(oD, p);
 }
 
-function PartKepviselok(szavazatok) {
-   const secondAnswerContainer = questionSelectorFunc("second");
+function PartKepviselok(sz, oD, p) {
    let partokList = [];
    let allVotes = [];
    const select = document.createElement("select");
    const option = document.createElement("option");
-   const p = document.createElement("p");
    option.innerHTML = "Válassz";
    option.value = "0";
    select.appendChild(option);
-   szavazatok.forEach((line) => {
+   sz.forEach((line) => {
       if (!partokList.includes(line.part)) {
          let option = document.createElement("option");
          option.value = line.part;
@@ -99,22 +121,12 @@ function PartKepviselok(szavazatok) {
          p.innerHTML = `A kiválasztott (${selectedOpt}) párt ${countParts[selectedOpt]} képviselőt indított.`;
       }
    });
-   addChildElements(secondAnswerContainer, select);
-   addChildElements(secondAnswerContainer, p);
+   addChildElements(oD, select);
+   addChildElements(oD, p);
 }
 
-function KepviseloInfo(szavazatok) {
-   const thirdAnswerContainer = questionSelectorFunc("third");
-}
-function SzavazatokAranya(szavazatok) {
-   const fourthAnswerContainer = questionSelectorFunc("fourth");
-}
-function SzavazatokMennyisege(szavazatok) {
-   const fifthAnswerContainer = questionSelectorFunc("fifth");
-}
-function LegtobbSzavazat(szavazatok) {
-   const sixthAnswerContainer = questionSelectorFunc("sixth");
-}
-function Nyertesek(szavazatok) {
-   const seventhAnswerContainer = questionSelectorFunc("seventh");
-}
+function KepviseloInfo(sz, oD, p) {}
+function SzavazatokAranya(sz, oD, p) {}
+function SzavazatokMennyisege(sz, oD, p) {}
+function LegtobbSzavazat(sz, oD, p) {}
+function Nyertesek(sz, oD, p) {}
