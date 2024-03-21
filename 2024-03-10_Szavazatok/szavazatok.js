@@ -1,56 +1,53 @@
-const szavazatok = [
-   {korzet: 5, szavazat: 19, nev: "Ablak Antal", part: "-"},
-   {korzet: 1, szavazat: 120, nev: "Alma Dalma", part: "GYEP"},
-   {korzet: 7, szavazat: 162, nev: "Bab Zsuzsanna", part: "ZEP"},
-   {korzet: 2, szavazat: 59, nev: "Barack Barna", part: "GYEP"},
-   {korzet: 6, szavazat: 73, nev: "Birs Helga", part: "GYEP"},
-   {korzet: 1, szavazat: 154, nev: "Bors Botond", part: "HEP"},
-   {korzet: 5, szavazat: 188, nev: "Brokkoli Gyula", part: "ZEP"},
-   {korzet: 6, szavazat: 29, nev: "Ceruza Zsombor", part: "-"},
-   {korzet: 4, szavazat: 143, nev: "Fasirt Ferenc", part: "HEP"},
-   {korzet: 8, szavazat: 157, nev: "Gomba Gitta", part: "TISZ"},
-   {korzet: 3, szavazat: 13, nev: "Halmi Helga", part: "-"},
-   {korzet: 2, szavazat: 66, nev: "Hold Ferenc", part: "-"},
-   {korzet: 7, szavazat: 34, nev: "Hurka Herold", part: "HEP"},
-   {korzet: 5, szavazat: 288, nev: "Joghurt Jakab", part: "TISZ"},
-   {korzet: 4, szavazat: 77, nev: "Kajszi Kolos", part: "GYEP"},
-   {korzet: 2, szavazat: 187, nev: "Kapor Karola", part: "ZEP"},
-   {korzet: 6, szavazat: 13, nev: "Karfiol Ede", part: "ZEP"},
-   {korzet: 6, szavazat: 187, nev: "Kefir Ilona", part: "TISZ"},
-   {korzet: 7, szavazat: 130, nev: "Kupa Huba", part: "-"},
-   {korzet: 8, szavazat: 98, nev: "Languszta Auguszta", part: "-"},
-   {korzet: 1, szavazat: 34, nev: "Lila Lilla", part: "-"},
-   {korzet: 1, szavazat: 56, nev: "Medve Rudolf", part: "-"},
-   {korzet: 5, szavazat: 67, nev: "Meggy Csilla", part: "GYEP"},
-   {korzet: 3, szavazat: 45, nev: "Moly Piroska", part: "-"},
-   {korzet: 4, szavazat: 221, nev: "Monitor Tibor", part: "-"},
-   {korzet: 8, szavazat: 288, nev: "Narancs Edmond", part: "GYEP"},
-   {korzet: 2, szavazat: 220, nev: "Oldalas Olga", part: "HEP"},
-   {korzet: 3, szavazat: 185, nev: "Pacal Kata", part: "HEP"},
-   {korzet: 1, szavazat: 199, nev: "Petrezselyem Petra", part: "ZEP"},
-   {korzet: 8, szavazat: 77, nev: "Pokol Vidor", part: "-"},
-   {korzet: 8, szavazat: 67, nev: "Ragu Ida", part: "HEP"},
-   {korzet: 3, szavazat: 156, nev: "Retek Etelka", part: "ZEP"},
-   {korzet: 7, szavazat: 129, nev: "Sajt Hajnalka", part: "TISZ"},
-   {korzet: 4, szavazat: 38, nev: "Simon Simon", part: "-"},
-   {korzet: 3, szavazat: 87, nev: "Szilva Szilvia", part: "GYEP"},
-   {korzet: 3, szavazat: 187, nev: "Tejes Attila", part: "TISZ"},
-   {korzet: 2, szavazat: 65, nev: "Tejfel Edit", part: "TISZ"},
-   {korzet: 4, szavazat: 39, nev: "Uborka Ubul", part: "ZEP"},
-   {korzet: 6, szavazat: 288, nev: "Vadas Marcell", part: "HEP"},
-   {korzet: 5, szavazat: 68, nev: "Vagdalt Edit", part: "HEP"},
-];
-
 function getData(exerciseNumber) {
+   const szavazatok = [
+      {korzet: 5, szavazat: 19, nev: "Ablak Antal", part: "-"},
+      {korzet: 1, szavazat: 120, nev: "Alma Dalma", part: "GYEP"},
+      {korzet: 7, szavazat: 162, nev: "Bab Zsuzsanna", part: "ZEP"},
+      {korzet: 2, szavazat: 59, nev: "Barack Barna", part: "GYEP"},
+      {korzet: 6, szavazat: 73, nev: "Birs Helga", part: "GYEP"},
+      {korzet: 1, szavazat: 154, nev: "Bors Botond", part: "HEP"},
+      {korzet: 5, szavazat: 188, nev: "Brokkoli Gyula", part: "ZEP"},
+      {korzet: 6, szavazat: 29, nev: "Ceruza Zsombor", part: "-"},
+      {korzet: 4, szavazat: 143, nev: "Fasirt Ferenc", part: "HEP"},
+      {korzet: 8, szavazat: 157, nev: "Gomba Gitta", part: "TISZ"},
+      {korzet: 3, szavazat: 13, nev: "Halmi Helga", part: "-"},
+      {korzet: 2, szavazat: 66, nev: "Hold Ferenc", part: "-"},
+      {korzet: 7, szavazat: 34, nev: "Hurka Herold", part: "HEP"},
+      {korzet: 5, szavazat: 288, nev: "Joghurt Jakab", part: "TISZ"},
+      {korzet: 4, szavazat: 77, nev: "Kajszi Kolos", part: "GYEP"},
+      {korzet: 2, szavazat: 187, nev: "Kapor Karola", part: "ZEP"},
+      {korzet: 6, szavazat: 13, nev: "Karfiol Ede", part: "ZEP"},
+      {korzet: 6, szavazat: 187, nev: "Kefir Ilona", part: "TISZ"},
+      {korzet: 7, szavazat: 130, nev: "Kupa Huba", part: "-"},
+      {korzet: 8, szavazat: 98, nev: "Languszta Auguszta", part: "-"},
+      {korzet: 1, szavazat: 34, nev: "Lila Lilla", part: "-"},
+      {korzet: 1, szavazat: 56, nev: "Medve Rudolf", part: "-"},
+      {korzet: 5, szavazat: 67, nev: "Meggy Csilla", part: "GYEP"},
+      {korzet: 3, szavazat: 45, nev: "Moly Piroska", part: "-"},
+      {korzet: 4, szavazat: 221, nev: "Monitor Tibor", part: "-"},
+      {korzet: 8, szavazat: 288, nev: "Narancs Edmond", part: "GYEP"},
+      {korzet: 2, szavazat: 220, nev: "Oldalas Olga", part: "HEP"},
+      {korzet: 3, szavazat: 185, nev: "Pacal Kata", part: "HEP"},
+      {korzet: 1, szavazat: 199, nev: "Petrezselyem Petra", part: "ZEP"},
+      {korzet: 8, szavazat: 77, nev: "Pokol Vidor", part: "-"},
+      {korzet: 8, szavazat: 67, nev: "Ragu Ida", part: "HEP"},
+      {korzet: 3, szavazat: 156, nev: "Retek Etelka", part: "ZEP"},
+      {korzet: 7, szavazat: 129, nev: "Sajt Hajnalka", part: "TISZ"},
+      {korzet: 4, szavazat: 38, nev: "Simon Simon", part: "-"},
+      {korzet: 3, szavazat: 87, nev: "Szilva Szilvia", part: "GYEP"},
+      {korzet: 3, szavazat: 187, nev: "Tejes Attila", part: "TISZ"},
+      {korzet: 2, szavazat: 65, nev: "Tejfel Edit", part: "TISZ"},
+      {korzet: 4, szavazat: 39, nev: "Uborka Ubul", part: "ZEP"},
+      {korzet: 6, szavazat: 288, nev: "Vadas Marcell", part: "HEP"},
+      {korzet: 5, szavazat: 68, nev: "Vagdalt Edit", part: "HEP"},
+   ];
+   const jogosultakSzama = 12345;
    const outputDiv = document.querySelector("#output");
    const paragraphElem = document.createElement("p");
-   outputDiv.classList.add("border", "border-dark", "rounded-3");
-   paragraphElem.classList.add("fw-bold", "fs-3", "m-5");
    clearInnerHtml(outputDiv);
    switch (exerciseNumber) {
       case 1:
          KepviselokSzama(szavazatok, outputDiv, paragraphElem);
-
          break;
       case 2:
          PartKepviselok(szavazatok, outputDiv, paragraphElem);
@@ -59,7 +56,7 @@ function getData(exerciseNumber) {
          KepviseloInfo(szavazatok, outputDiv, paragraphElem);
          break;
       case 4:
-         SzavazatokAranya(szavazatok, outputDiv, paragraphElem);
+         SzavazatokAranya(szavazatok, jogosultakSzama, outputDiv, paragraphElem);
          break;
       case 5:
          SzavazatokMennyisege(szavazatok, outputDiv, paragraphElem);
@@ -71,6 +68,8 @@ function getData(exerciseNumber) {
          Nyertesek(szavazatok, outputDiv, paragraphElem);
          break;
    }
+   outputDiv.classList.add("border", "border-dark", "rounded-3");
+   paragraphElem.classList.add("fw-bold", "fs-3", "m-5");
 }
 
 function clearInnerHtml(elem) {
@@ -83,9 +82,9 @@ function addChildElements(parent, child) {
 
 function styleElements(obj) {}
 
-function countSameElements(list) {
+function countSameElements(data) {
    const counts = {};
-   list.forEach(function (x) {
+   data.forEach(function (x) {
       counts[x] = (counts[x] || 0) + 1;
    });
    return counts;
@@ -157,7 +156,66 @@ function KepviseloInfo(sz, oD, p) {
       addChildElements(oD, p);
    });
 }
-function SzavazatokAranya(sz, oD, p) {}
-function SzavazatokMennyisege(sz, oD, p) {}
+
+function SzavazatokAranya(sz, jSz, oD, p) {
+   let votesSum = 0;
+   sz.forEach((line) => {
+      votesSum += line.szavazat;
+   });
+   p.innerHTML = `A választáson ${votesSum} állampolgár, a jogosultak ${(
+      (votesSum / jSz) *
+      100
+   ).toFixed(2)}%-a vett részt.`;
+   addChildElements(oD, p);
+}
+function SzavazatokMennyisege(sz, oD, p) {
+   let partokList = [];
+   let votesToParts = [];
+   sz.forEach((line) => {
+      if (!partokList.includes(line.part)) {
+         partokList.push(line.part);
+      }
+   });
+   for (let i = 0; i < partokList.length; i++) {
+      let voteCounter = 0;
+      sz.forEach((line) => {
+         if (partokList[i] == line.part) {
+            voteCounter += line.szavazat;
+            votesToParts.push({part_nev: line.part, all_votes: voteCounter});
+         }
+      });
+      console.log(votesToParts);
+   }
+
+   createTable(oD, votesToParts);
+}
+
+function createTable(oD, data) {
+   // --- Create a table with thead and tbody ---
+   let table = document.createElement("table");
+   let thead = document.createElement("thead");
+   let tbody = document.createElement("tbody");
+   let tr = document.createElement("tr");
+
+   // --- Adding the head elements ---
+
+   // --- Add elements to the table ---
+   for (let i = 0; i < data.length; i++) {
+      let tr = document.createElement("tr");
+      let rows = [];
+
+      // --- Adding the body elements ---
+      rows.push(data[i].part_nev, data[i].all_votes);
+      rows.forEach((row) => {
+         let td = document.createElement("td");
+         td.appendChild(document.createTextNode(`${row}`));
+         tr.appendChild(td);
+         tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+   }
+   addChildElements(oD, table);
+}
+
 function LegtobbSzavazat(sz, oD, p) {}
 function Nyertesek(sz, oD, p) {}
