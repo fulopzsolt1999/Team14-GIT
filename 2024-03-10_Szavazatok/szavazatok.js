@@ -46,7 +46,7 @@ function getData(exerciseNumber) {
    const paragraphElem = document.createElement("p");
    outputDiv.classList.add("border", "border-dark", "rounded-3");
    paragraphElem.classList.add("fw-bold", "fs-3", "m-5");
-   clearOutputDiv(outputDiv);
+   clearInnerHtml(outputDiv);
    switch (exerciseNumber) {
       case 1:
          KepviselokSzama(szavazatok, outputDiv, paragraphElem);
@@ -73,8 +73,8 @@ function getData(exerciseNumber) {
    }
 }
 
-function clearOutputDiv(oD) {
-   oD.innerHTML = "";
+function clearInnerHtml(elem) {
+   elem.innerHTML = "";
 }
 
 function addChildElements(parent, child) {
@@ -123,9 +123,40 @@ function PartKepviselok(sz, oD, p) {
    });
    addChildElements(oD, select);
    addChildElements(oD, p);
+   select.classList.add("form-select", "m-4");
+   select.style.width = "12vh";
 }
 
-function KepviseloInfo(sz, oD, p) {}
+function KepviseloInfo(sz, oD, p) {
+   const formDiv = document.createElement("div");
+   const inputSpan = document.createElement("span");
+   const input = document.createElement("input");
+   inputSpan.innerHTML = "Vezetéknév és Keresztnév";
+   input.setAttribute("type", "text");
+
+   addChildElements(formDiv, inputSpan);
+   addChildElements(formDiv, input);
+   addChildElements(oD, formDiv);
+
+   formDiv.classList.add("input-group");
+   inputSpan.classList.add("input-group-text");
+   input.classList.add("form-control");
+
+   input.addEventListener("change", () => {
+      let kepviselok = [];
+      sz.forEach((kepviselo) => {
+         kepviselok.push(kepviselo.nev);
+      });
+
+      if (kepviselok.includes(input.value)) {
+         p.innerHTML = `"${input.value}" nevű képviselő jelölt szerepel a nyilvántartásban.`;
+      } else {
+         p.innerHTML = "Ilyen nevű képviselőjelölt nem szerepel a nyilvántartásban!";
+      }
+      input.value = "";
+      addChildElements(oD, p);
+   });
+}
 function SzavazatokAranya(sz, oD, p) {}
 function SzavazatokMennyisege(sz, oD, p) {}
 function LegtobbSzavazat(sz, oD, p) {}
