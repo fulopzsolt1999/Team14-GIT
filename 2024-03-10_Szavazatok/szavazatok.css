@@ -2,3 +2,7 @@
    width: 100vh;
    margin: 5vh auto;
 }
+
+body {
+   background-color: rgba(0, 0, 0, 0.418);
+}
