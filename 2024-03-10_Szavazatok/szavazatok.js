@@ -183,10 +183,12 @@ function SzavazatokMennyisege(sz, oD, p) {
          }
       });
    }
-   createTable(oD, votesToParts);
+   p.innerHTML = "Pártonként összesített szavazatok száma: ";
+   oD.appendChild(p);
+   createTable(oD, votesToParts, ["Pártok", "Összesített szavazatok"]);
 }
 
-function createTable(oD, data) {
+function createTable(oD, data, tableHeaders) {
    // --- Create a table with thead and tbody ---
    const table = document.createElement("table");
    const thead = document.createElement("thead");
@@ -194,7 +196,6 @@ function createTable(oD, data) {
    const tr = document.createElement("tr");
 
    // --- Adding the head elements ---
-   const tableHeaders = ["Pártok", "Összesített szavazatok"];
    for (let i = 0; i < tableHeaders.length; i++) {
       const th = document.createElement("th");
       th.appendChild(document.createTextNode(`${tableHeaders[i]}`));
@@ -208,7 +209,12 @@ function createTable(oD, data) {
       let rows = [];
 
       // --- Adding the body elements ---
-      rows.push(data[i].part_nev, data[i].all_votes);
+      if (data.length > 5) {
+         rows.push(data[i].korzet, data[i].nev, data[i].part, data[i].szavazat);
+      } else {
+         rows.push(data[i].part_nev, data[i].all_votes);
+      }
+
       rows.forEach((row) => {
          const td = document.createElement("td");
          td.appendChild(document.createTextNode(`${row}`));
@@ -243,10 +249,34 @@ function LegtobbSzavazat(sz, oD, p) {
 }
 function Nyertesek(sz, oD, p) {
    let votePlaces = [];
-   let voteCheck = 0;
+   let winners = [];
    sz.forEach((line) => {
       if (!votePlaces.includes(line.korzet)) {
          votePlaces.push(line.korzet);
       }
    });
+   votePlaces.sort(function (a, b) {
+      return a - b;
+   });
+   for (let i = 0; i < votePlaces.length; i++) {
+      sz.forEach((line) => {
+         if (votePlaces[i] == line.korzet) {
+            if (winners.length == 0 || winners[i] == undefined) {
+               winners.push({
+                  korzet: line.korzet,
+                  nev: line.nev,
+                  part: line.part,
+                  szavazat: line.szavazat,
+               });
+            } else if (winners[i].szavazat < line.szavazat) {
+               winners[i].nev = line.nev;
+               winners[i].part = line.part;
+               winners[i].szavazat = line.szavazat;
+            }
+         }
+      });
+   }
+   p.innerHTML = "A választáson körzetenkénti győztesek táblázata:";
+   oD.appendChild(p);
+   createTable(oD, winners, ["Körzet", "Képviselő neve", "Párt neve", "Szavazatok száma"]);
 }
