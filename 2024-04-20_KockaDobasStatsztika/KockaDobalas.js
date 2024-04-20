@@ -1,99 +1,116 @@
-var dobasok = [];
-
-function KockaDobas() {
-   return Math.round(Math.random() * 5) + 1; //1 és 6 közötti dobás érték
-}
-
-function TobbKockaDobas(dobasokMennyisege) {
-   let tobbDobas = [];
-   for (let i = 0; i < dobasokMennyisege; i++) {
-      tobbDobas.push(KockaDobas());
-   }
-   return tobbDobas;
-}
-
-kockaEldobasa.addEventListener("click", () => {
-   KockaMegjelenites(3);
-});
-
-function KockaMegjelenites(dobasokMennyisege) {
-   let megtortentDobasok = TobbKockaDobas(dobasokMennyisege);
-   for (let i = 0; i < megtortentDobasok.length; i++) {
-      dobasok.push(megtortentDobasok[i]);
-   }
-   document.querySelector("#kockaKep01").style.backgroundImage =
-      "url(img/" + megtortentDobasok[0] + ".png)";
-
-   document.querySelector("#kockaKep02").style.backgroundImage =
-      "url(img/" + megtortentDobasok[1] + ".png)";
-
-   document.querySelector("#kockaKep03").style.backgroundImage =
-      "url(img/" + megtortentDobasok[2] + ".png)";
-
-   //TRIPLA DOBÁS FELADATOK:
-   MaxDobas(megtortentDobasok);
-   HatosDobas(megtortentDobasok);
-   TriplaHatos(megtortentDobasok);
-   Egyformak(megtortentDobasok);
-}
-function DobasokSzama() {
-   let dobasMennyiseg = [0, 0, 0, 0, 0, 0, 0];
-   for (let i = 0; i < dobasok.length; i++) {
-      dobasMennyiseg[dobasok[i]]++; //Ha találok egy adott dobást, annak indexét növelem eggyel...
-      dobasMennyiseg[0] += dobasok[i];
-   }
-   return dobasMennyiseg;
-}
-
-function AtlagSzamitas(eredmenyek) {
-   return eredmenyek[0] / dobasok.length;
-}
-
-function StatisztikaKiir(eredmenyek) {
-   document.querySelector("#egyes").innerHTML = eredmenyek[1];
-   document.querySelector("#kettes").innerHTML = eredmenyek[2];
-   document.querySelector("#harmas").innerHTML = eredmenyek[3];
-   document.querySelector("#negyes").innerHTML = eredmenyek[4];
-   document.querySelector("#otos").innerHTML = eredmenyek[5];
-   document.querySelector("#hatos").innerHTML = eredmenyek[6];
-   document.querySelector("#dobasMennyiseg").innerHTML = dobasok.length;
-   document.querySelector("#osszesen").innerHTML = eredmenyek[0];
-   document.querySelector("#atlag").innerHTML = AtlagSzamitas(eredmenyek).toFixed(2);
-}
-
-kockaEldobasa.addEventListener("click", () => {
-   StatisztikaKiir(DobasokSzama());
-});
-
-//FELADATOK TRIPLA DOBÁSRA:
-function MaxDobas(aktDobasok) {
-   let aktDobasOsszege = aktDobasok[0] + aktDobasok[1] + aktDobasok[2];
-   let eddigiLegnagyobb = document.querySelector("#legnagyobb").innerHTML;
-   if (aktDobasOsszege > eddigiLegnagyobb) {
-      document.querySelector("#legnagyobb").innerHTML = aktDobasOsszege;
-   }
-}
-
-function HatosDobas(aktDobasok) {
-   for (let i = 0; i < aktDobasok.length; i++) {
-      if (aktDobasok[i] == 6) {
-         let aktMennyiseg = document.querySelector("#hatosok").innerHTML; //Kiolvasom
-         aktMennyiseg++; //Növelem
-         document.querySelector("#hatosok").innerHTML = aktMennyiseg; //Visszaírom
+$(document).ready(() => {
+   const RollDices = (rollNumber) => {
+      let rolls = [];
+      for (let i = 0; i < rollNumber; i++) {
+         rolls.push(Math.round(Math.random() * 5) + 1);
       }
-   }
-}
+      return rolls;
+   };
 
-function TriplaHatos(aktDobasok) {
-   if (aktDobasok[0] == 6 && aktDobasok[1] == 6 && aktDobasok[2] == 6) {
-      document.querySelector("#triplaHat").innerHTML = "Volt";
-   }
-}
+   var rolledNumbers = [];
 
-function Egyformak(aktDobasok) {
-   if (aktDobasok[0] == aktDobasok[1] && aktDobasok[1] == aktDobasok[2]) {
-      let aktMennyiseg = document.querySelector("#egyformak").innerHTML; //Kiolvasom
-      aktMennyiseg++; //Növelem
-      document.querySelector("#egyformak").innerHTML = aktMennyiseg; //Visszaírom
-   }
-}
+   $("#kockaEldobasa").click(() => {
+      ShowDice();
+      const allRolledNumbers = ShowRolledNumbers();
+      ShowTwoFourSixPercents(allRolledNumbers);
+   });
+
+   const ShowDice = () => {
+      rolledNumbers = RollDices(3);
+      $("#kockaKep01").css("backgroundImage", `url(img/${rolledNumbers[0]}.png)`);
+      $("#kockaKep02").css("backgroundImage", `url(img/${rolledNumbers[1]}.png)`);
+      $("#kockaKep03").css("backgroundImage", `url(img/${rolledNumbers[2]}.png)`);
+
+      //TRIPLA DOBÁS FELADATOK:
+      MaxRoll(rolledNumbers);
+      SixRoll(rolledNumbers);
+      SameNumbers(rolledNumbers);
+   };
+
+   const ShowRolledNumbers = () => {
+      let diceNumbers = {
+         one: $("#ones").html(),
+         two: $("#twos").html(),
+         three: $("#threes").html(),
+         four: $("#fours").html(),
+         five: $("#fives").html(),
+         six: $("#sixs").html(),
+         rollsSum: () => {
+            return (
+               Number(diceNumbers.one) +
+               Number(diceNumbers.two) +
+               Number(diceNumbers.three) +
+               Number(diceNumbers.four) +
+               Number(diceNumbers.five) +
+               Number(diceNumbers.six)
+            );
+         },
+      };
+
+      for (let i = 0; i < rolledNumbers.length; i++) {
+         switch (rolledNumbers[i]) {
+            case 1:
+               diceNumbers.one++;
+               $("#ones").html(diceNumbers.one);
+               break;
+            case 2:
+               diceNumbers.two++;
+               $("#twos").html(diceNumbers.two);
+               break;
+            case 3:
+               diceNumbers.three++;
+               $("#threes").html(diceNumbers.three);
+               break;
+            case 4:
+               diceNumbers.four++;
+               $("#fours").html(diceNumbers.four);
+               break;
+            case 5:
+               diceNumbers.five++;
+               $("#fives").html(diceNumbers.five);
+               break;
+            case 6:
+               diceNumbers.six++;
+               $("#sixs").html(diceNumbers.six);
+               break;
+            default:
+               break;
+         }
+      }
+      $("#rolls-sum").html(diceNumbers.rollsSum);
+      return diceNumbers;
+   };
+
+   const ShowTwoFourSixPercents = (aRN) => {
+      $("#two-percent").html(`${Math.round((Number(aRN.two) / aRN.rollsSum()) * 100).toFixed(2)}%`);
+      $("#four-percent").html(
+         `${Math.round((Number(aRN.four) / aRN.rollsSum()) * 100).toFixed(2)}%`
+      );
+      $("#six-percent").html(`${Math.round((Number(aRN.six) / aRN.rollsSum()) * 100).toFixed(2)}%`);
+   };
+
+   const MaxRoll = (rolledNumbers) => {
+      let rolledNumbersSum = rolledNumbers[0] + rolledNumbers[1] + rolledNumbers[2];
+      let biggestSum = $("#legnagyobb").html();
+      if (rolledNumbersSum > biggestSum) {
+         $("#legnagyobb").html(rolledNumbersSum);
+      }
+   };
+
+   const SixRoll = (rolledNumbers) => {
+      for (let i = 0; i < rolledNumbers.length; i++) {
+         if (rolledNumbers[i] == 6) {
+            let prevValue = $("#hatosok").html(); //Kiolvasom
+            prevValue++; //Növelem
+            $("#hatosok").html(prevValue); //Visszaírom
+         }
+      }
+   };
+   const SameNumbers = (rolledNumbers) => {
+      if (rolledNumbers[0] == rolledNumbers[1] && rolledNumbers[1] == rolledNumbers[2]) {
+         let prevValue = $("#egyformak").html(); //Kiolvasom
+         prevValue++; //Növelem
+         $("#egyformak").html(prevValue); //Visszaírom
+      }
+   };
+});

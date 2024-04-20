@@ -9,8 +9,8 @@
          rel="stylesheet"
          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
          crossorigin="anonymous" />
-
       <link rel="stylesheet" href="KockaDobalas.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    </head>
 
    <body>
@@ -53,60 +53,56 @@
          </thead>
          <tbody>
             <tr>
-               <td>Egyes</td>
-               <td id="egyes">0</td>
+               <td>Melyik szám hányszor volt dobva (objektum)</td>
+               <td id="all-nums">
+                  <table>
+                     <tr><td>Egyesek: </td><td id="ones">0</td></tr>
+                     <tr><td>Kettesek: </td><td id="twos">0</td></tr>
+                     <tr><td>Hármasok: </td><td id="threes">0</td></tr>
+                     <tr><td>Négyesek: </td><td id="fours">0</td></tr>
+                     <tr><td>Ötösök: </td><td id="fives">0</td></tr>
+                     <tr><td>Hatosok: </td><td id="sixs">0</td></tr>
+                     <tr><td>Összes dobás száma: </td><td id="rolls-sum">0</td></tr>
+                  </table>
+               </td>
             </tr>
             <tr>
-               <td>Kettes</td>
-               <td id="kettes">0</td>
+               <td>3 különböző dobott szám előfordulása</td>
+               <td id="all-diff-nums">0</td>
             </tr>
             <tr>
-               <td>Hármas</td>
-               <td id="harmas">0</td>
+               <td>Legkevesebbszer előfordult szám</td>
+               <td id="least-occur-num">0</td>
             </tr>
             <tr>
-               <td>Négyes</td>
-               <td id="negyes">0</td>
+               <td>Legtöbbször előfordult szám</td>
+               <td id="most-occur-num">0</td>
             </tr>
             <tr>
-               <td>Ötös</td>
-               <td id="otos">0</td>
+               <td>-2- előfordulása százalékosan</td>
+               <td id="two-percent">0</td>
             </tr>
             <tr>
-               <td>Hatos</td>
-               <td id="hatos">0</td>
-            </tr>
-         </tbody>
-         <tfoot>
-            <tr>
-               <td>Dobások száma</td>
-               <td id="dobasMennyiseg">0</td>
+               <td>-4- előfordulása százalékosan</td>
+               <td id="four-percent">0</td>
             </tr>
             <tr>
-               <td>Összesen</td>
-               <td id="osszesen">0</td>
+               <td>-6- előfordulása százalékosan</td>
+               <td id="six-percent">0</td>
             </tr>
             <tr>
-               <td>Átlag</td>
-               <td id="atlag">0</td>
+               <td>Csak páratlant dobott számok száma</td>
+               <td id="only-odd">0</td>
             </tr>
             <tr>
-               <td>Legnagyobb dobás</td>
-               <td id="legnagyobb">0</td>
-            </tr>
-            <tr>
-               <td>Hatosok száma</td>
-               <td id="hatosok">0</td>
-            </tr>
-            <tr>
-               <td>Tripla hatos</td>
-               <td id="triplaHat">nem volt</td>
+               <td>Sorozat dobások száma</td>
+               <td id="sequence">0</td>
             </tr>
             <tr>
                <td>Egyformak Száma</td>
                <td id="egyformak">0</td>
             </tr>
-         </tfoot>
+         </tbody>
       </table>
       <script src="KockaDobalas.js"></script>
    </body>
