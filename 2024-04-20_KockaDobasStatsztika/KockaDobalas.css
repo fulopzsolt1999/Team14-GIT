@@ -1,0 +1,11 @@
+#igazito {
+    margin: 0px auto;
+    box-shadow: 3px 3px 5px black;
+}
+
+.kocka {
+    width: 100px;
+    height: 100px;
+    background-image: none;
+    display: inline-block;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Színválasztó oldal</title>
+    <link rel="stylesheet" href="szinvalaszto.css">
+</head>
+
+<body>
+    <div id="keveroFelulet">
+        <label for="redSet">Red(piros)</label>
+        <input type="range" min="0" max="255" value="0" id="redSet">
+        <p id="redValue">0</p>
+
+        <label for="greenSet">Green(zöld)</label>
+        <input type="range" min="0" max="255" value="0" id="greenSet">
+        <p id="greenValue">0</p>
+
+        <label for="blueSet">Blue(kék)</label>
+        <input type="range" min="0" max="255" value="0" id="blueSet">
+        <p id="blueValue">0</p>
+    </div>
+    <div id="RGBkodMegjelenito">rgb(0,0,0);</div>
+
+    <script src="szinvalaszto.js"></script>
+</body>
+
+</html>
