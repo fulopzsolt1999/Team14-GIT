@@ -9,6 +9,7 @@ $(document).ready(() => {
       DifferentNumbers(rolledNumbers);
       LeastRolled(allRolledNumbers);
       MostRolled(allRolledNumbers);
+      OnlyOddRolls();
    });
 
    const RollDices = (rollNumber) => {
@@ -171,5 +172,22 @@ $(document).ready(() => {
          }
       }
       $("#least-rolled").html(result.join(", "));
+   };
+
+   const OnlyOddRolls = () => {
+      let onlyOddRolls = Number($("#only-odd").html());
+      let oddCheck = true;
+      for (let i = 0; i < rolledNumbers.length; i++) {
+         if (rolledNumbers[i] % 2 === 0) {
+            oddCheck = false;
+            break;
+         }
+      }
+      if (oddCheck) {
+         onlyOddRolls++;
+         $("#only-odd").html(onlyOddRolls);
+      } else {
+         $("#least-rolled").html(onlyOddRolls);
+      }
    };
 });
