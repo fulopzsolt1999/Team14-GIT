@@ -1,4 +1,16 @@
 $(document).ready(() => {
+   var rolledNumbers = [];
+
+   $("#kockaEldobasa").click(() => {
+      ShowDice();
+      const allRolledNumbers = ShowRolledNumbers();
+      const rollsSum = SumAllRolledNumbers(allRolledNumbers);
+      ShowTwoFourSixPercents(allRolledNumbers, rollsSum);
+      DifferentNumbers(rolledNumbers);
+      LeastRolled(allRolledNumbers);
+      MostRolled(allRolledNumbers);
+   });
+
    const RollDices = (rollNumber) => {
       let rolls = [];
       for (let i = 0; i < rollNumber; i++) {
@@ -7,110 +19,157 @@ $(document).ready(() => {
       return rolls;
    };
 
-   var rolledNumbers = [];
-
-   $("#kockaEldobasa").click(() => {
-      ShowDice();
-      const allRolledNumbers = ShowRolledNumbers();
-      ShowTwoFourSixPercents(allRolledNumbers);
-   });
-
    const ShowDice = () => {
       rolledNumbers = RollDices(3);
       $("#kockaKep01").css("backgroundImage", `url(img/${rolledNumbers[0]}.png)`);
       $("#kockaKep02").css("backgroundImage", `url(img/${rolledNumbers[1]}.png)`);
       $("#kockaKep03").css("backgroundImage", `url(img/${rolledNumbers[2]}.png)`);
-
-      //TRIPLA DOBÁS FELADATOK:
-      MaxRoll(rolledNumbers);
-      SixRoll(rolledNumbers);
-      SameNumbers(rolledNumbers);
    };
 
    const ShowRolledNumbers = () => {
-      let diceNumbers = {
-         one: $("#ones").html(),
-         two: $("#twos").html(),
-         three: $("#threes").html(),
-         four: $("#fours").html(),
-         five: $("#fives").html(),
-         six: $("#sixs").html(),
-         rollsSum: () => {
-            return (
-               Number(diceNumbers.one) +
-               Number(diceNumbers.two) +
-               Number(diceNumbers.three) +
-               Number(diceNumbers.four) +
-               Number(diceNumbers.five) +
-               Number(diceNumbers.six)
-            );
-         },
-      };
+      let diceNumbers = [
+         Number($("#ones").html()),
+         Number($("#twos").html()),
+         Number($("#threes").html()),
+         Number($("#fours").html()),
+         Number($("#fives").html()),
+         Number($("#sixs").html()),
+      ];
 
       for (let i = 0; i < rolledNumbers.length; i++) {
          switch (rolledNumbers[i]) {
             case 1:
-               diceNumbers.one++;
-               $("#ones").html(diceNumbers.one);
+               diceNumbers[0]++;
+               $("#ones").html(diceNumbers[0]);
                break;
             case 2:
-               diceNumbers.two++;
-               $("#twos").html(diceNumbers.two);
+               diceNumbers[1]++;
+               $("#twos").html(diceNumbers[1]);
                break;
             case 3:
-               diceNumbers.three++;
-               $("#threes").html(diceNumbers.three);
+               diceNumbers[2]++;
+               $("#threes").html(diceNumbers[2]);
                break;
             case 4:
-               diceNumbers.four++;
-               $("#fours").html(diceNumbers.four);
+               diceNumbers[3]++;
+               $("#fours").html(diceNumbers[3]);
                break;
             case 5:
-               diceNumbers.five++;
-               $("#fives").html(diceNumbers.five);
+               diceNumbers[4]++;
+               $("#fives").html(diceNumbers[4]);
                break;
             case 6:
-               diceNumbers.six++;
-               $("#sixs").html(diceNumbers.six);
+               diceNumbers[5]++;
+               $("#sixs").html(diceNumbers[5]);
                break;
             default:
                break;
          }
       }
-      $("#rolls-sum").html(diceNumbers.rollsSum);
+
       return diceNumbers;
    };
 
-   const ShowTwoFourSixPercents = (aRN) => {
-      $("#two-percent").html(`${Math.round((Number(aRN.two) / aRN.rollsSum()) * 100).toFixed(2)}%`);
-      $("#four-percent").html(
-         `${Math.round((Number(aRN.four) / aRN.rollsSum()) * 100).toFixed(2)}%`
-      );
-      $("#six-percent").html(`${Math.round((Number(aRN.six) / aRN.rollsSum()) * 100).toFixed(2)}%`);
+   const SumAllRolledNumbers = (aRN) => {
+      let rollsSum = 0;
+      for (let i = 0; i < aRN.length; i++) {
+         rollsSum += aRN[i];
+      }
+      $("#rolls-sum").html(rollsSum);
+      return rollsSum;
    };
 
-   const MaxRoll = (rolledNumbers) => {
-      let rolledNumbersSum = rolledNumbers[0] + rolledNumbers[1] + rolledNumbers[2];
-      let biggestSum = $("#legnagyobb").html();
-      if (rolledNumbersSum > biggestSum) {
-         $("#legnagyobb").html(rolledNumbersSum);
+   const DifferentNumbers = (rolledNumbers) => {
+      if (
+         rolledNumbers[0] != rolledNumbers[1] &&
+         rolledNumbers[1] != rolledNumbers[2] &&
+         rolledNumbers[2] != rolledNumbers[0]
+      ) {
+         let prevValue = $("#all-diff-nums").html();
+         prevValue++;
+         $("#all-diff-nums").html(prevValue);
       }
    };
 
-   const SixRoll = (rolledNumbers) => {
-      for (let i = 0; i < rolledNumbers.length; i++) {
-         if (rolledNumbers[i] == 6) {
-            let prevValue = $("#hatosok").html(); //Kiolvasom
-            prevValue++; //Növelem
-            $("#hatosok").html(prevValue); //Visszaírom
+   const ShowTwoFourSixPercents = (aRN, rS) => {
+      $("#two-percent").html(`${Math.round((Number(aRN[1]) / rS) * 100).toFixed(2)}%`);
+      $("#four-percent").html(`${Math.round((Number(aRN[3]) / rS) * 100).toFixed(2)}%`);
+      $("#six-percent").html(`${Math.round((Number(aRN[5]) / rS) * 100).toFixed(2)}%`);
+   };
+
+   const MostRolled = (aRN) => {
+      let maxValueIndexes = [];
+      let result = [];
+
+      for (let i = 0; i < aRN.length; i++) {
+         if (aRN[i] === aRN[aRN.indexOf(Math.max(...aRN))]) {
+            maxValueIndexes.push(i);
          }
       }
-   };
-   const SameNumbers = (rolledNumbers) => {
-      if (rolledNumbers[0] == rolledNumbers[1] && rolledNumbers[1] == rolledNumbers[2]) {
-         let prevValue = $("#egyformak").html(); //Kiolvasom
-         prevValue++; //Növelem
-         $("#egyformak").html(prevValue); //Visszaírom
+
+      for (let i = 0; i < maxValueIndexes.length; i++) {
+         switch (maxValueIndexes[i]) {
+            case 0:
+               result.push("1");
+               break;
+            case 1:
+               result.push("2");
+               break;
+            case 2:
+               result.push("3");
+               break;
+            case 3:
+               result.push("4");
+               break;
+            case 4:
+               result.push("5");
+               break;
+            case 5:
+               result.push("6");
+               break;
+
+            default:
+               break;
+         }
       }
+      $("#most-rolled").html(result.join(", "));
+   };
+
+   const LeastRolled = (aRN) => {
+      let minValueIndexes = [];
+      let result = [];
+
+      for (let i = 0; i < aRN.length; i++) {
+         if (aRN[i] === aRN[aRN.indexOf(Math.min(...aRN))]) {
+            minValueIndexes.push(i);
+         }
+      }
+
+      for (let i = 0; i < minValueIndexes.length; i++) {
+         switch (minValueIndexes[i]) {
+            case 0:
+               result.push("1");
+               break;
+            case 1:
+               result.push("2");
+               break;
+            case 2:
+               result.push("3");
+               break;
+            case 3:
+               result.push("4");
+               break;
+            case 4:
+               result.push("5");
+               break;
+            case 5:
+               result.push("6");
+               break;
+
+            default:
+               break;
+         }
+      }
+      $("#least-rolled").html(result.join(", "));
    };
 });
