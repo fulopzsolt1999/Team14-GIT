@@ -1,147 +1,40 @@
-//Első verzió
-//Probléma: nem szűröm az ismétlődést, akár egy szám többször is előfordulhat a "sorsolás" során...
-function OtosLottoszamGeneratorV1() {
-    let lottoSzamok = []
-    for (let i = 0; i < 5; i++) {
-        let generaltSzam = Math.round(Math.random() * 4) + 1;
-        lottoSzamok.push(generaltSzam);
-    }
-    return lottoSzamok;
-}
-
-
-//Második verzió
-//Probléma: Ha egy szám ismétlődik, akkor kevesebb kihúzott szám került a tömbbe, mert akkor is léptet, ha az adott szám már szerepelt...
-
-function OtosLottoszamGeneratorV2() {
-    let lottoSzamok = [];
-    for (let i = 0; i < 5; i++) {
-        let generaltSzam = Math.round(Math.random() * 4) + 1;
-        let szerepelE = false;
-        for (let j = 0; j < lottoSzamok.length; j++) {
-            if (generaltSzam == lottoSzamok[j]) {
-                szerepelE = true;
-            }
-        }
-        if (szerepelE == false) {
-            lottoSzamok.push(generaltSzam)
-        }
-    }
-    return lottoSzamok;
-}
-
-
-//Harmadik verzió
-//TELJESEN JÓ - For ciklussal
-function OtosLottoszamGeneratorV3() {
-    let lottoSzamok = [];
-    for (let i = 0; i < 5; i++) {
-        let generaltSzam = Math.round(Math.random() * 4) + 1;
-        let szerepelE = false;
-        for (let j = 0; j < lottoSzamok.length; j++) {
-            if (generaltSzam == lottoSzamok[j]) {
-                szerepelE = true;
-            }
-        }
-        if (szerepelE == false) {
-            lottoSzamok.push(generaltSzam)
-        }
-        else {
-            i--;
-        }
-    }
-    return lottoSzamok;
-}
-//TESZTRÉSZ:
-console.log("BUGOS: Ismétlődés nincs szűrve:")
-console.log(OtosLottoszamGeneratorV1());
-
-console.log("BUGOS: Kevesebb szám van ha ismétlődik:")
-console.log(OtosLottoszamGeneratorV2());
-
-
-console.log("Megoldás: For cilkussal:")
-console.log(OtosLottoszamGeneratorV3());
-
-
-
-//Negyedik verzió
-//TELJESEN JÓ - While ciklussal
-function OtosLottoszamGeneratorV4() {
-    let lottoSzamok = [];
-    while (lottoSzamok.length < 5) {
-        let generaltSzam = Math.round(Math.random() * 4) + 1;
-        let szerepelE = false;
-        for (let j = 0; j < lottoSzamok.length; j++) {
-            if (generaltSzam == lottoSzamok[j]) {
-                szerepelE = true;
-            }
-        }
-        if (szerepelE == false) {
-            lottoSzamok.push(generaltSzam);
-        }
-    }
-    return lottoSzamok;
-}
-
-console.log("Megoldás: While cilkussal:")
-console.log(OtosLottoszamGeneratorV4());
-
-
-//Ötödik verzió
-//TELJESEN JÓ - While ciklussal és includdal
-function OtosLottoszamGeneratorV5() {
-    let lottoSzamok = [];
-    while (lottoSzamok.length < 5) {
-        let generaltSzam = Math.round(Math.random() * 4) + 1;
-        if (!lottoSzamok.includes(generaltSzam)) {
-            lottoSzamok.push(generaltSzam);
-        }
-    }
-    return lottoSzamok;
-}
-
-console.log("Megoldás: While ciklussal és includdal")
-console.log(OtosLottoszamGeneratorV4());
-
-//Hatodik verzió
-//TELJESEN JÓ - UNIVERZÁLIS LOTTÓSZÁM GENERÁTOR
-function UniverzalisLottoszamGenerator(szamokMennyisege, maxKihuzhatoSzam) {
-    if (szamokMennyisege <= maxKihuzhatoSzam) {
-        let lottoSzamok = [];
-        while (lottoSzamok.length < szamokMennyisege) {
+$(document).ready(function () {
+   const LottoNumberGenerator = (szamokMennyisege, maxKihuzhatoSzam) => {
+      if (szamokMennyisege <= maxKihuzhatoSzam) {
+         let lottoSzamok = [];
+         while (lottoSzamok.length < szamokMennyisege) {
             let generaltSzam = Math.round(Math.random() * (maxKihuzhatoSzam - 1)) + 1;
             if (!lottoSzamok.includes(generaltSzam)) {
-                lottoSzamok.push(generaltSzam);
+               lottoSzamok.push(generaltSzam);
             }
-        }
-        return lottoSzamok;
-    }
-    else {
-        return "NEM megfelelő a függvény paraméterezése!";
-    }
-}
-console.log("rossz érték, nagyobb a szám mennyisége, mint az intervallum");
-console.log(UniverzalisLottoszamGenerator(10, 4));
+         }
+         return lottoSzamok;
+      } else {
+         return "NEM megfelelő a függvény paraméterezése!";
+      }
+   };
 
+   $("#btn-5-lotto").click(function () {
+      $(".ball-container").html("");
+      GenerateBalls($("#btn-5-lotto").val(), LottoNumberGenerator($("#btn-5-lotto").val(), 90));
+   });
+   $("#btn-6-lotto").click(function () {
+      $(".ball-container").html("");
+      GenerateBalls($("#btn-6-lotto").val(), LottoNumberGenerator($("#btn-6-lotto").val(), 45));
+   });
+   $("#btn-skandinav").click(function () {
+      $(".ball-container").html("");
+      GenerateBalls($("#btn-skandinav").val(), LottoNumberGenerator($("#btn-skandinav").val(), 35));
+   });
 
-console.log("Pont annyi a számok mennyisége, mint az intervallum nagysága");
-console.log(UniverzalisLottoszamGenerator(5, 5));
-
-console.log("Ötös lottószám generátor");
-console.log(UniverzalisLottoszamGenerator(5, 90));
-
-
-console.log("Skandináv lottó generátor");
-console.log(UniverzalisLottoszamGenerator(7, 35));
-
-
-console.log("Hatos lottó generátor");
-console.log(UniverzalisLottoszamGenerator(6, 45));
-
-
-console.log("KENÓ generátor");
-console.log(UniverzalisLottoszamGenerator(20, 80));
+   const GenerateBalls = (ballsNum, lottoNumbers) => {
+      for (let i = 0; i < ballsNum; i++) {
+         $(".ball-container").append(
+            `<div class='show-ball row'><img src='img/blank_ball.png'><span id='ball-number-${i}'>${lottoNumbers[i]}</span></div>`
+         );
+      }
+   };
+});
 
 /*
 - Aktuálisan kihúzott számokat vizulásan kiválasztani...("golyókkal megjeleníteni")
