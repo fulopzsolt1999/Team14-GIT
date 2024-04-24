@@ -269,9 +269,20 @@ $(document).ready(function () {
                   <div class="row" id="lotto-num-stat"></div>
                </td>
             </tr>
-
+            <tr>
+               <th>Leggyakrabban kihúzott szám</th>
+               <td id="most-drawed-num"></td>
+            </tr>
+            <tr>
+               <th>Legritkábban kihúzott szám</th>
+               <td id="least-drawed-num"></td>
+            </tr>
          </table>`
       );
+
+      const objValues = Object.values(lottoNumbersObj);
+      let mostDrawedNum = Math.max(...objValues.map((item) => item));
+      let leastDrawedNum = Math.min(...objValues.map((item) => item));
 
       Object.keys(lottoNumbersObj).forEach((key) => {
          if (actLottoNums.includes(Number(key))) {
@@ -282,6 +293,11 @@ $(document).ready(function () {
             $("#lotto-num-stat").append(
                `<div class="col-1 p-0 m-2" id="num"><${key}: ${lottoNumbersObj[key]}> </div>`
             );
+         }
+         if (lottoNumbersObj[key] === mostDrawedNum) {
+            $("#most-drawed-num").append(`<${key}> `);
+         } else if (lottoNumbersObj[key] === leastDrawedNum) {
+            $("#least-drawed-num").append(`<${key}> `);
          }
       });
    };

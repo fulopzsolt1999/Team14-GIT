@@ -39,12 +39,6 @@ button {
    align-items: center;
    position: relative;
 }
-.ball-container .show-ball img {
-   /* position: absolute;
-   top: 55%;
-   left: 50%;
-   transform: translate(-50%, -50%); */
-}
 span {
    font-size: 24px;
 }
@@ -70,12 +64,12 @@ h5 {
 }
 
 table th {
-   font-size: 24px;
+   font-size: 22px;
    text-align: center;
    vertical-align: middle;
 }
 table td {
-   font-size: 20px;
+   font-size: 18px;
 }
 
 #lotto-num-cell {
