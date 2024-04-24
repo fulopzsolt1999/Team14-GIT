@@ -1,0 +1,90 @@
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+.container {
+   width: 100rem;
+   height: 75vh;
+   padding-top: 5rem;
+   margin: auto;
+}
+.ball-container {
+   width: 60rem;
+   height: 20rem;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+.select-lotto {
+   width: 30vh;
+   height: fit-content;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding-top: 1rem;
+}
+button {
+   width: 10rem;
+   margin-top: 2rem;
+}
+.show-ball {
+   width: 14rem;
+   height: 10rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+}
+.ball-container .show-ball img {
+   /* position: absolute;
+   top: 55%;
+   left: 50%;
+   transform: translate(-50%, -50%); */
+}
+span {
+   font-size: 24px;
+}
+h5 {
+   margin: 0;
+   padding: 0;
+}
+#ball-number-0,
+#ball-number-1,
+#ball-number-2,
+#ball-number-3,
+#ball-number-4,
+#ball-number-5,
+#ball-number-6 {
+   width: fit-content;
+   height: 2.5rem;
+   position: absolute;
+   top: 45%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: rgba(0, 0, 0, 0.25);
+   border-radius: 10px;
+}
+
+table th {
+   font-size: 24px;
+   text-align: center;
+   vertical-align: middle;
+}
+table td {
+   font-size: 20px;
+}
+
+#lotto-num-cell {
+   width: 60rem;
+   text-align: justify;
+}
+#num {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+}

@@ -8,96 +8,37 @@
          rel="stylesheet"
          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
          crossorigin="anonymous" />
+      <link rel="stylesheet" href="style.css" />
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <title>Lottószám generátor</title>
    </head>
-
-   <style>
-      * {
-         padding: 0;
-         margin: 0;
-         box-sizing: border-box;
-      }
-      .container {
-         height: 75vh;
-         padding-top: 5rem;
-         display: flex;
-         flex-direction: row;
-      }
-      .ball-container {
-         height: 20rem;
-         display: flex;
-         flex-direction: row;
-         justify-content: center;
-         align-items: center;
-      }
-      .select-lotto {
-         width: 30vh;
-         height: fit-content;
-         display: flex;
-         flex-direction: column;
-         justify-content: center;
-         align-items: center;
-         margin-right: 2.5rem;
-         padding-top: 1rem;
-      }
-      button {
-         width: 10rem;
-         margin-top: 2rem;
-      }
-      .show-ball {
-         width: 10rem;
-         height: 10rem;
-         display: flex;
-         flex-direction: column;
-         justify-content: center;
-         align-items: center;
-         /*  position: relative; */
-      }
-      img {
-         /* position: absolute;
-         top: 55%;
-         left: 50%;
-         transform: translate(-50%, -50%); */
-      }
-      span {
-         font-size: 24px;
-      }
-      h5 {
-         margin: 0;
-         padding: 0;
-      }
-      /* #ball-number-0,
-      #ball-number-1,
-      #ball-number-2,
-      #ball-number-3,
-      #ball-number-4,
-      #ball-number-5,
-      #ball-number-6 {
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-      } */
-   </style>
-
    <body>
       <h1>Lottó szám sorsolás</h1>
-      <div class="container">
-         <div class="select-lotto">
+      <div class="container row">
+         <div class="select-lotto col-6">
             <button class="btn btn-primary" id="btn-5-lotto" value="5">5-ös Lottó számok</button>
             <button class="btn btn-primary" id="btn-6-lotto" value="6">6-os Lottó számok</button>
             <button class="btn btn-primary" id="btn-skandinav" value="7">Skandináv lottó</button>
          </div>
-         <div class="ball-container row"> </div>
+         <div class="ball-container row col-6"> </div>
+         <div class="table-container"></div>
       </div>
-      <table class="table table-hover table-striped table-dark">
+      <!-- <table class="table table-hover table-striped table-dark">
          <tr>
-            <th></th>
-            <th>Adatok</th>
+            <th>Vizsgálat</th>
+            <th colspan="2">5-ös Lottó Adatok</th>
+            <th colspan="2">6-os Lottó Adatok</th>
+            <th colspan="2">Skandináv Lottó Adatok</th>
          </tr>
-         <tr> </tr>
-      </table>
+         <tr>
+            <td>Szám statisztika</td>
+            <td id="lotto-5-num-stat">a</td>
+            <td></td>
+            <td id="lotto-6-num-stat">b</td>
+            <td></td>
+            <td id="lotto-skandinav-num-stat">c</td>
+         </tr>
+      </table> -->
       <script src="lotto.js"></script>
    </body>
 </html>
