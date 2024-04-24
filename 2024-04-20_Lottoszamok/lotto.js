@@ -254,62 +254,24 @@ $(document).ready(function () {
 
    const GenerateTable = (lottoNumbersObj, lottoType, actLottoNums) => {
       $(".table-container").html("");
-      switch (Number(lottoType)) {
-         case 5:
-            $(".table-container").append(
-               `<table class="table table-hover table-striped table-dark">
-                  <tr>
-                     <th>Vizsgálat</th>
-                     <th>5-ös Lottó Adatok</th>
-                  </tr>
-                  <tr>
-                     <th>Szám előfordulás</th>
-                     <td id="lotto-num-cell">
-                        <div class="row" id="lotto-num-stat"></div>
-                     </td>
-                  </tr>
-
-               </table>`
-            );
-            break;
-         case 6:
-            $(".table-container").append(
-               `<table class="table table-hover table-striped table-dark">
-                  <tr>
-                     <th>Vizsgálat</th>
-                     <th>6-os Lottó Adatok</th>
-                  </tr>
-                  <tr>
-                     <th>Szám előfordulás</th>
-                     <td id="lotto-num-cell">
-                        <div class="row" id="lotto-num-stat"></div>
-                     </td>
-                  </tr>
-
-               </table>`
-            );
-            break;
-         case 7:
-            $(".table-container").append(
-               `<table class="table table-hover table-striped table-dark">
-                  <tr>
-                     <th>Vizsgálat</th>
-                     <th>Skandináv Lottó Adatok</th>
-                  </tr>
-                  <tr>
-                     <th>Szám előfordulás</th>
-                     <td id="lotto-num-cell">
-                        <div class="row" id="lotto-num-stat"></div>
-                     </td>
-                  </tr>
-
-               </table>`
-            );
-            break;
-
-         default:
-            break;
+      if (lottoType == 7) {
+         lottoType = "Skandinav";
       }
+      $(".table-container").append(
+         `<table class="table table-hover table-striped table-dark">
+            <tr>
+               <th>Vizsgálat</th>
+               <th>${lottoType} Lottó Adatok</th>
+            </tr>
+            <tr>
+               <th>Szám előfordulás</th>
+               <td id="lotto-num-cell">
+                  <div class="row" id="lotto-num-stat"></div>
+               </td>
+            </tr>
+
+         </table>`
+      );
 
       Object.keys(lottoNumbersObj).forEach((key) => {
          if (actLottoNums.includes(Number(key))) {
