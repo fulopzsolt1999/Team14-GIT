@@ -227,21 +227,26 @@ $(document).ready(function () {
       const lottoType = $("#btn-5-lotto").val();
       $(".ball-container").html("");
       GenerateBalls(lottoType, lotto5Numbers);
-      GenerateTable(allLotto5Numbers, lottoType, lotto5Numbers);
+      GenerateTable(lottoType);
+      AppendTableWithData(allLotto5Numbers, lotto5Numbers);
    });
+
    $("#btn-6-lotto").click(function () {
       const lotto6Numbers = LottoNumberGenerator($("#btn-6-lotto").val(), 45);
       const lottoType = $("#btn-6-lotto").val();
       $(".ball-container").html("");
       GenerateBalls(lottoType, lotto6Numbers);
-      GenerateTable(allLotto6Numbers, lottoType, lotto6Numbers);
+      GenerateTable(lottoType);
+      AppendTableWithData(allLotto6Numbers, lotto6Numbers);
    });
+
    $("#btn-skandinav").click(function () {
       const lottoSkandinavNumbers = LottoNumberGenerator($("#btn-skandinav").val(), 35);
       const lottoType = $("#btn-skandinav").val();
       $(".ball-container").html("");
       GenerateBalls(lottoType, lottoSkandinavNumbers);
-      GenerateTable(allSkandinavNumbers, lottoType, lottoSkandinavNumbers);
+      GenerateTable(lottoType);
+      AppendTableWithData(allSkandinavNumbers, lottoSkandinavNumbers);
    });
 
    const GenerateBalls = (ballsNum, lottoNumbers) => {
@@ -252,7 +257,7 @@ $(document).ready(function () {
       }
    };
 
-   const GenerateTable = (lottoNumbersObj, lottoType, actLottoNums) => {
+   const GenerateTable = (lottoType) => {
       $(".table-container").html("");
       if (lottoType == 7) {
          lottoType = "Skandinav";
@@ -270,28 +275,57 @@ $(document).ready(function () {
                </td>
             </tr>
             <tr>
+               <th>Legritkábban kihúzott szám</th>
+               <td id="least-drawed-num"></td>
+            </tr>
+            <tr>
                <th>Leggyakrabban kihúzott szám</th>
                <td id="most-drawed-num"></td>
             </tr>
             <tr>
-               <th>Legritkábban kihúzott szám</th>
-               <td id="least-drawed-num"></td>
+               <th>Legkisebb kihúzott szám összesítve</th>
+               <td id="lowest-drawed-num"></td>
+            </tr>
+            <tr>
+               <th>Legnagyobb kihúzott szám összesítve</th>
+               <td id="biggest-drawed-num"></td>
+            </tr>
+            <tr>
+               <th>Legnagyobb és Legkisebb kihúzott szám különbsége összesítve</th>
+               <td id="diff-drawed-num"></td>
+            </tr>
+            <tr>
+               <th>Legkisebb kihúzott szám aktuális</th>
+               <td id="act-lowest-drawed-num"></td>
+            </tr>
+            <tr>
+               <th>Legnagyobb kihúzott szám aktuális</th>
+               <td id="act-biggest-drawed-num"></td>
+            </tr>
+            <tr>
+               <th>Legnagyobb és Legkisebb kihúzott szám különbsége aktuális</th>
+               <td id="act-diff-drawed-num"></td>
             </tr>
          </table>`
       );
+   };
 
+   const AppendTableWithData = (lottoNumbersObj, actLottoNums) => {
       const objValues = Object.values(lottoNumbersObj);
+      const objKeys = Object.keys(lottoNumbersObj);
       let mostDrawedNum = Math.max(...objValues.map((item) => item));
       let leastDrawedNum = Math.min(...objValues.map((item) => item));
+      let biggestDrawedNum = 0;
+      let lowestDrawedNum = objKeys.length;
 
-      Object.keys(lottoNumbersObj).forEach((key) => {
+      objKeys.forEach((key) => {
          if (actLottoNums.includes(Number(key))) {
             $("#lotto-num-stat").append(
-               `<div class="col-1 p-0 m-2 text-dark bg-light" id="num"><${key}: ${lottoNumbersObj[key]}> </div>`
+               `<div class="col-1 p-0 m-2 text-dark bg-light" id="num"><${key} - ${lottoNumbersObj[key]}> </div>`
             );
          } else {
             $("#lotto-num-stat").append(
-               `<div class="col-1 p-0 m-2" id="num"><${key}: ${lottoNumbersObj[key]}> </div>`
+               `<div class="col-1 p-0 m-2" id="num"><${key} - ${lottoNumbersObj[key]}> </div>`
             );
          }
          if (lottoNumbersObj[key] === mostDrawedNum) {
@@ -299,7 +333,24 @@ $(document).ready(function () {
          } else if (lottoNumbersObj[key] === leastDrawedNum) {
             $("#least-drawed-num").append(`<${key}> `);
          }
+         if (lottoNumbersObj[key] > 0) {
+            biggestDrawedNum = key;
+         }
       });
+      for (let i = 0; i < objKeys.length; i++) {
+         if (objValues[i] > 0 && objKeys[i] < lowestDrawedNum) {
+            lowestDrawedNum = objKeys[i];
+            break;
+         }
+      }
+
+      $("#biggest-drawed-num").html(biggestDrawedNum);
+      $("#lowest-drawed-num").html(lowestDrawedNum);
+      $("#diff-drawed-num").html(biggestDrawedNum - lowestDrawedNum);
+
+      $("#act-biggest-drawed-num").html(actLottoNums[actLottoNums.length - 1]);
+      $("#act-lowest-drawed-num").html(actLottoNums[0]);
+      $("#act-diff-drawed-num").html(actLottoNums[actLottoNums.length - 1] - actLottoNums[0]);
    };
 });
 
