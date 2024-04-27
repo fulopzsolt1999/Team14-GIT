@@ -175,14 +175,17 @@ $(document).ready(function () {
       34: 0,
       35: 0,
    };
+   var myNumbers = [];
 
    $(".nav-item").click(() => {
-      let myNumbers = [];
+      myNumbers = [];
       $(".select-numbers").html("");
+      $(".ball-container").html("");
       const activeNavItemValue = Number(
          $(".nav-item active .nav-link").prevObject[0].activeElement.value
       );
       const selectableNumbers = activeNavItemValue === 5 ? 90 : activeNavItemValue === 6 ? 45 : 35;
+
       $(".select-numbers").html(
          `<h1>${
             activeNavItemValue === 5 ? "Ötös" : activeNavItemValue === 6 ? "Hatos" : "Skandináv"
@@ -195,32 +198,38 @@ $(document).ready(function () {
          );
       }
       $("#drawing").removeAttr("hidden");
+      $("#drawing").attr("disabled", true);
 
-      HandleNumbersSelection(activeNavItemValue, myNumbers);
-   });
-
-   $(".select-numbers ul li button").click(() => {
-      console.log(this.value);
-   });
-
-   const HandleNumbersSelection = (aNIV, mN) => {
       $(".numbers").click((e) => {
-         if (mN.length < aNIV || mN.includes($(e.target).val())) {
-            if (!mN.includes($(e.target).val()) && mN.length < aNIV) {
-               mN.push($(e.target).val());
-               $(e.target).toggleClass("selected", true);
-               console.log(mN);
-            } else {
-               mN.splice(mN.indexOf($(e.target).val()), 1);
-               $(e.target).toggleClass("selected", false);
-               console.log(mN);
-            }
+         if (!myNumbers.includes($(e.target).val())) {
+            myNumbers.push($(e.target).val());
+            $(e.target).toggleClass("selected", true);
          } else {
-            !$(".numbers").hasClass("selected")
-               ? $(".numbers").attr("disabled", true)
-               : $(".numbers").attr("disabled", false);
+            myNumbers.splice(myNumbers.indexOf($(e.target).val()), 1);
+            $(e.target).toggleClass("selected", false);
          }
+         HandleNumbersSelection(activeNavItemValue);
       });
+   });
+
+   const HandleNumbersSelection = (aNIV) => {
+      if (myNumbers.length == aNIV) {
+         $("#drawing").attr("disabled", false);
+         let prevAsd = $(".numbers");
+         for (let i = 0; i < prevAsd.length; i++) {
+            if (!$(prevAsd[i]).hasClass("selected")) {
+               $(prevAsd[i]).attr("disabled", true);
+            }
+         }
+      } else {
+         $("#drawing").attr("disabled", true);
+         let prevAsd = $(".numbers");
+         for (let i = 0; i < prevAsd.length; i++) {
+            if (!$(prevAsd[i]).hasClass("selected")) {
+               $(prevAsd[i]).attr("disabled", false);
+            }
+         }
+      }
    };
 
    $("#drawing").click(() => {
@@ -228,7 +237,6 @@ $(document).ready(function () {
       const activeNavItemValue = selectableNumbers === 90 ? 5 : selectableNumbers === 45 ? 6 : 7;
 
       const lottoNumbers = LottoNumberGenerator(activeNavItemValue, selectableNumbers);
-      //console.log(activeNavItemValue, selectableNumbers, lottoNumbers);
 
       $(".ball-container").html("");
       GenerateNumberChoosingBox(selectableNumbers);
@@ -249,7 +257,9 @@ $(document).ready(function () {
          default:
             break;
       }
-      HandleUserWinning(lottoNumbers);
+      setTimeout(() => {
+         HandleUserWinning(lottoNumbers);
+      }, 10);
    });
 
    const LottoNumberGenerator = (aNV, sN) => {
@@ -314,8 +324,49 @@ $(document).ready(function () {
    };
 
    const HandleUserWinning = (lN) => {
-      for (let i = 0; i < array.length; i++) {
-         const element = array[i];
+      let sameNumbers = [];
+      myNumbers.sort((a, b) => {
+         return a - b;
+      });
+
+      for (let i = 0; i < lN.length; i++) {
+         for (let j = 0; j < myNumbers.length; j++) {
+            if (Number(myNumbers[j]) === lN[i]) {
+               sameNumbers.push(lN[i]);
+            }
+         }
+      }
+      switch (sameNumbers.length) {
+         case 1:
+            alert(`Gratulálok lett egy találatod! (${sameNumbers[0]})`);
+            break;
+         case 2:
+            alert(`Gratulálok lett két találatod! (${(sameNumbers[0], sameNumbers[1])})`);
+            break;
+         case 3:
+            alert(
+               `Gratulálok lett három találatod! (${
+                  (sameNumbers[0], sameNumbers[1], sameNumbers[2])
+               })`
+            );
+            break;
+         case 4:
+            alert(
+               `Gratulálok lett négy találatod! (${
+                  (sameNumbers[0], sameNumbers[1], sameNumbers[2], sameNumbers[3])
+               })`
+            );
+            break;
+         case 5:
+            alert(
+               `Gratulálok lett öt találatod! (${
+                  (sameNumbers[0], sameNumbers[1], sameNumbers[2], sameNumbers[3], sameNumbers[4])
+               })`
+            );
+            break;
+
+         default:
+            break;
       }
    };
 
