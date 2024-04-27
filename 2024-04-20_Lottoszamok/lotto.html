@@ -13,11 +13,39 @@
       <title>Lottószám generátor</title>
    </head>
    <body>
-      <h1>Lottó szám sorsolás</h1>
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg justify-content-between">
+         <a class="navbar-brand">Lottózz velem</a>
+         <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+               <li class="nav-item active">
+                  <a class="nav-link" href="#">5-ös lottó</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">6-os lottó</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Skandináv lottó</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
       <div class="container row">
+         <div class="select-numbers"></div>
          <div class="select-lotto col-6">
             <button class="btn btn-primary" id="btn-5-lotto" value="5">5-ös Lottó számok</button>
+
             <button class="btn btn-primary" id="btn-6-lotto" value="6">6-os Lottó számok</button>
+
             <button class="btn btn-primary" id="btn-skandinav" value="7">Skandináv lottó</button>
          </div>
          <div class="ball-container row col-6"> </div>

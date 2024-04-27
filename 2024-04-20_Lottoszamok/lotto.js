@@ -226,6 +226,7 @@ $(document).ready(function () {
       const lotto5Numbers = LottoNumberGenerator($("#btn-5-lotto").val(), 90);
       const lottoType = $("#btn-5-lotto").val();
       $(".ball-container").html("");
+      GenerateNumberChoosingBox(90);
       GenerateBalls(lottoType, lotto5Numbers);
       GenerateTable(lottoType);
       AppendTableWithData(allLotto5Numbers, lotto5Numbers);
@@ -248,6 +249,12 @@ $(document).ready(function () {
       GenerateTable(lottoType);
       AppendTableWithData(allSkandinavNumbers, lottoSkandinavNumbers);
    });
+
+   const GenerateNumberChoosingBox = (numbers) => {
+      for (let i = 0; i < numbers; i++) {
+         $("#my-lotto-5-numbers").append(`<li><button value="${i}">${i}</button></li>`);
+      }
+   };
 
    const GenerateBalls = (ballsNum, lottoNumbers) => {
       for (let i = 0; i < ballsNum; i++) {
