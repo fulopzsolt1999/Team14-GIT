@@ -177,6 +177,7 @@ $(document).ready(function () {
    };
 
    $(".nav-item").click(() => {
+      let myNumbers = [];
       $(".select-numbers").html("");
       const activeNavItemValue = Number(
          $(".nav-item active .nav-link").prevObject[0].activeElement.value
@@ -195,8 +196,32 @@ $(document).ready(function () {
       }
       $("#drawing").removeAttr("hidden");
 
-      //HandleNumbersSelection(activeNavItemValue);
+      HandleNumbersSelection(activeNavItemValue, myNumbers);
    });
+
+   $(".select-numbers ul li button").click(() => {
+      console.log(this.value);
+   });
+
+   const HandleNumbersSelection = (aNIV, mN) => {
+      $(".numbers").click((e) => {
+         if (mN.length < aNIV || mN.includes($(e.target).val())) {
+            if (!mN.includes($(e.target).val()) && mN.length < aNIV) {
+               mN.push($(e.target).val());
+               $(e.target).toggleClass("selected", true);
+               console.log(mN);
+            } else {
+               mN.splice(mN.indexOf($(e.target).val()), 1);
+               $(e.target).toggleClass("selected", false);
+               console.log(mN);
+            }
+         } else {
+            !$(".numbers").hasClass("selected")
+               ? $(".numbers").attr("disabled", true)
+               : $(".numbers").attr("disabled", false);
+         }
+      });
+   };
 
    $("#drawing").click(() => {
       const selectableNumbers = $(".numbers").length;
@@ -224,20 +249,8 @@ $(document).ready(function () {
          default:
             break;
       }
+      HandleUserWinning(lottoNumbers);
    });
-
-   /* const HandleNumbersSelection = (aNIV) => {
-      $(".selected-numbers").append(`<h1>Saját számok</h1><ul></ul>`);
-      $(".numbers").click((e) => {
-         const countSelectedNumbers = $(".selected-numbers ul li");
-         if (countSelectedNumbers.length < aNIV) {
-            $(e.target).addClass("selected");
-            $(".selected-numbers ul").append(`<li>${$(e.target).val()}</li>`);
-         } else {
-            $(".numbers").attr("disabled", "true");
-         }
-      });
-   }; */
 
    const LottoNumberGenerator = (aNV, sN) => {
       if (aNV <= sN) {
@@ -297,6 +310,12 @@ $(document).ready(function () {
          $(".ball-container").append(
             `<div class='show-ball row'><img src='img/blank_ball.png'><span id='ball-number-${i}'>${lottoNumbers[i]}</span></div>`
          );
+      }
+   };
+
+   const HandleUserWinning = (lN) => {
+      for (let i = 0; i < array.length; i++) {
+         const element = array[i];
       }
    };
 
