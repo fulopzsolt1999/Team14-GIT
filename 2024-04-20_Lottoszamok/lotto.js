@@ -175,13 +175,77 @@ $(document).ready(function () {
       34: 0,
       35: 0,
    };
-   const LottoNumberGenerator = (lottoType, lottoMaxNumber) => {
-      if (lottoType <= lottoMaxNumber) {
+
+   $(".nav-item").click(() => {
+      $(".select-numbers").html("");
+      const activeNavItemValue = Number(
+         $(".nav-item active .nav-link").prevObject[0].activeElement.value
+      );
+      const selectableNumbers = activeNavItemValue === 5 ? 90 : activeNavItemValue === 6 ? 45 : 35;
+      $(".select-numbers").html(
+         `<h1>${
+            activeNavItemValue === 5 ? "Ötös" : activeNavItemValue === 6 ? "Hatos" : "Skandináv"
+         } Lottó</h1><ul></ul>`
+      );
+
+      for (let i = 1; i <= selectableNumbers; i++) {
+         $(".select-numbers ul").append(
+            `<li><button class="numbers" value=${i}>${i}</button></li>`
+         );
+      }
+      $("#drawing").removeAttr("hidden");
+
+      //HandleNumbersSelection(activeNavItemValue);
+   });
+
+   $("#drawing").click(() => {
+      const selectableNumbers = $(".numbers").length;
+      const activeNavItemValue = selectableNumbers === 90 ? 5 : selectableNumbers === 45 ? 6 : 7;
+
+      const lottoNumbers = LottoNumberGenerator(activeNavItemValue, selectableNumbers);
+      //console.log(activeNavItemValue, selectableNumbers, lottoNumbers);
+
+      $(".ball-container").html("");
+      GenerateNumberChoosingBox(selectableNumbers);
+      GenerateBalls(activeNavItemValue, lottoNumbers);
+      GenerateTable(activeNavItemValue);
+
+      switch (activeNavItemValue) {
+         case 5:
+            AppendTableWithData(allLotto5Numbers, lottoNumbers);
+            break;
+         case 6:
+            AppendTableWithData(allLotto6Numbers, lottoNumbers);
+            break;
+         case 7:
+            AppendTableWithData(allSkandinavNumbers, lottoNumbers);
+            break;
+
+         default:
+            break;
+      }
+   });
+
+   /* const HandleNumbersSelection = (aNIV) => {
+      $(".selected-numbers").append(`<h1>Saját számok</h1><ul></ul>`);
+      $(".numbers").click((e) => {
+         const countSelectedNumbers = $(".selected-numbers ul li");
+         if (countSelectedNumbers.length < aNIV) {
+            $(e.target).addClass("selected");
+            $(".selected-numbers ul").append(`<li>${$(e.target).val()}</li>`);
+         } else {
+            $(".numbers").attr("disabled", "true");
+         }
+      });
+   }; */
+
+   const LottoNumberGenerator = (aNV, sN) => {
+      if (aNV <= sN) {
          let lottoNumbers = [];
-         while (lottoNumbers.length < lottoType) {
-            let genNumber = Math.round(Math.random() * (lottoMaxNumber - 1)) + 1;
+         while (lottoNumbers.length < aNV) {
+            let genNumber = Math.round(Math.random() * (sN - 1)) + 1;
             if (!lottoNumbers.includes(genNumber)) {
-               switch (Number(lottoType)) {
+               switch (aNV) {
                   case 5:
                      const allLotto5NumbersKeys = Object.keys(allLotto5Numbers);
                      for (let i = 0; i < allLotto5NumbersKeys.length; i++) {
@@ -222,36 +286,8 @@ $(document).ready(function () {
       }
    };
 
-   $("#btn-5-lotto").click(function () {
-      const lotto5Numbers = LottoNumberGenerator($("#btn-5-lotto").val(), 90);
-      const lottoType = $("#btn-5-lotto").val();
-      $(".ball-container").html("");
-      GenerateNumberChoosingBox(90);
-      GenerateBalls(lottoType, lotto5Numbers);
-      GenerateTable(lottoType);
-      AppendTableWithData(allLotto5Numbers, lotto5Numbers);
-   });
-
-   $("#btn-6-lotto").click(function () {
-      const lotto6Numbers = LottoNumberGenerator($("#btn-6-lotto").val(), 45);
-      const lottoType = $("#btn-6-lotto").val();
-      $(".ball-container").html("");
-      GenerateBalls(lottoType, lotto6Numbers);
-      GenerateTable(lottoType);
-      AppendTableWithData(allLotto6Numbers, lotto6Numbers);
-   });
-
-   $("#btn-skandinav").click(function () {
-      const lottoSkandinavNumbers = LottoNumberGenerator($("#btn-skandinav").val(), 35);
-      const lottoType = $("#btn-skandinav").val();
-      $(".ball-container").html("");
-      GenerateBalls(lottoType, lottoSkandinavNumbers);
-      GenerateTable(lottoType);
-      AppendTableWithData(allSkandinavNumbers, lottoSkandinavNumbers);
-   });
-
-   const GenerateNumberChoosingBox = (numbers) => {
-      for (let i = 0; i < numbers; i++) {
+   const GenerateNumberChoosingBox = (sN) => {
+      for (let i = 0; i < sN; i++) {
          $("#my-lotto-5-numbers").append(`<li><button value="${i}">${i}</button></li>`);
       }
    };

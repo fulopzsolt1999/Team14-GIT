@@ -4,9 +4,23 @@
    box-sizing: border-box;
 }
 
-h1 {
-   margin: 1rem;
-   text-align: center;
+.navbar-brand {
+   margin-left: 2rem;
+}
+
+.navbar-nav {
+   display: flex;
+   flex-direction: row;
+   margin-right: 2rem;
+}
+
+.navbar-nav li {
+   margin: 0 2rem;
+}
+
+.navbar-nav li button {
+   width: fit-content;
+   margin: 0;
 }
 
 .container {
@@ -16,31 +30,80 @@ h1 {
    margin: auto;
 }
 
-.ball-container {
-   width: 60rem;
-   height: 20rem;
+.select-my-numbers {
+   width: 100%;
+   height: fit-content;
+   padding: 0;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+}
+
+.select-my-numbers #drawing {
+   width: auto;
+   height: fit-content;
+   margin: auto 0;
+   font-size: 30px;
+}
+
+.select-my-numbers .select-numbers {
+   height: fit-content;
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+}
+
+.select-my-numbers .select-numbers h1 {
+   padding-left: 0.5rem;
+   margin: auto;
+}
+
+.select-my-numbers .select-numbers ul {
+   width: 31rem;
+   height: 25rem;
+   margin: 2rem;
+   padding: 0;
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   flex-direction: row;
+}
+
+.select-my-numbers .select-numbers ul li {
+   list-style: none;
+   width: 30px;
+   margin: 0 0.5rem;
+}
+
+.select-my-numbers .select-numbers ul li button {
+   width: 35px;
+   height: 35px;
+   margin: 0;
+   font-size: 18px;
+   border: none;
+   background-color: rgba(128, 128, 128, 0.15);
+   border-radius: 10px;
+   transition: background-color ease 0.5s;
+}
+
+.select-my-numbers .select-numbers ul li button:hover {
+   background-color: rgba(128, 128, 128, 0.5);
+}
+
+.select-my-numbers .select-numbers ul li button.selected {
+   background-color: rgba(222, 184, 135);
+}
+
+.select-my-numbers .ball-container {
+   width: 40rem;
+   margin: 1rem auto;
    display: flex;
    flex-direction: row;
    justify-content: center;
    align-items: center;
 }
 
-.select-lotto {
-   width: 30vh;
-   height: fit-content;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   padding-top: 1rem;
-}
-
-button {
-   width: 10rem;
-   margin-top: 2rem;
-}
-
-.show-ball {
+.select-my-numbers .ball-container .show-ball {
    width: 14rem;
    height: 10rem;
    display: flex;
@@ -50,13 +113,8 @@ button {
    position: relative;
 }
 
-span {
+.select-my-numbers .ball-container .show-ball span {
    font-size: 24px;
-}
-
-h5 {
-   margin: 0;
-   padding: 0;
 }
 
 #ball-number-0,
@@ -76,22 +134,22 @@ h5 {
    border-radius: 10px;
 }
 
-table th {
+.table-container table th {
    font-size: 22px;
    text-align: center;
    vertical-align: middle;
 }
 
-table td {
+.table-container table td {
    font-size: 18px;
 }
 
-#lotto-num-cell {
+.table-container table td#lotto-num-cell {
    width: 60rem;
    text-align: justify;
 }
 
-#num {
+.table-container table td#lotto-num-cell #lotto-num-stat #num {
    display: flex;
    justify-content: center;
    align-items: center;
