@@ -40,7 +40,7 @@ $(document).ready(async () => {
    });
 
    const GetColorHexCodeAndName = (HEX) => {
-      $("#color-name").html("");
+      $("#color-name").html("UKNOWN color name");
       for (let i = 0; i < colorsData.length; i++) {
          if (HEX === colorsData[i][0]) {
             $("#color-name").html(colorsData[i][1]);
