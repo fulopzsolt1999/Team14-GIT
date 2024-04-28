@@ -1,65 +1,87 @@
-redSet.addEventListener("input", redValueChange);
-function redValueChange() {
-    let newValue = document.querySelector("#redSet").value;
-    document.querySelector("#redValue").innerHTML = newValue;
-    let aktSzin = SzinKinyero();
-    Szinkevero(aktSzin);
-    SzinkodRGB(aktSzin);
-    LathatoBetuszin(aktSzin);
-}
+$(document).ready(async () => {
+   const text = await fetch("colornames.txt").then(($) => $.text());
+   const lines = text.split("\n");
+   var colorsData = [];
+   for (let i = 0; i < lines.length; i++) {
+      colorsData.push([lines[i].split(",")[0], lines[i].split(",")[1]]);
+   }
 
+   function RgbToHex(r, g, b) {
+      return ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
+   }
 
-greenSet.addEventListener("input", greenValueChange);
-function greenValueChange() {
-    let newValue = document.querySelector("#greenSet").value;
-    document.querySelector("#greenValue").innerHTML = newValue;
-    let aktSzin = SzinKinyero();
-    Szinkevero(aktSzin);
-    SzinkodRGB(aktSzin);
-    LathatoBetuszin(aktSzin);
-}
+   $(".input-class").on("input", (e) => {
+      const colorFirstLetter = e.target.id[0];
+      let newValue = $(e.target).val();
+      switch (colorFirstLetter) {
+         case "r":
+            $("#red-value").html(newValue);
+            break;
+         case "g":
+            $("#green-value").html(newValue);
+            break;
+         case "b":
+            $("#blue-value").html(newValue);
+            break;
 
+         default:
+            break;
+      }
+   });
 
-blueSet.addEventListener("input", blueValueChange);
-function blueValueChange() {
-    let newValue = document.querySelector("#blueSet").value;
-    document.querySelector("#blueValue").innerHTML = newValue;
-    let aktSzin = SzinKinyero();
-    Szinkevero(aktSzin);
-    SzinkodRGB(aktSzin);
-    LathatoBetuszin(aktSzin);
-}
+   $("#search").click(() => {
+      const getUserRGB = GetColorFromInput();
+      const getUserHEX = RgbToHex(getUserRGB.red, getUserRGB.green, getUserRGB.blue);
+      $("#color-HEX").html(`#${getUserHEX}`);
+      GetColorHexCodeAndName(getUserHEX);
+      ChangeBackgroundColor(getUserRGB);
+      RGBcolorCode(getUserRGB);
+      ChangeFontColor(getUserRGB);
+   });
 
-function SzinKinyero() {
-    let r = document.querySelector("#redValue").innerHTML;
-    let g = document.querySelector("#greenValue").innerHTML;
-    let b = document.querySelector("#blueValue").innerHTML;
-    let kinyertSzin = { red: r, green: g, blue: b };
-    return kinyertSzin
-}
+   const GetColorHexCodeAndName = (HEX) => {
+      $("#color-name").html("");
+      for (let i = 0; i < colorsData.length; i++) {
+         if (HEX === colorsData[i][0]) {
+            $("#color-name").html(colorsData[i][1]);
+         }
+      }
+   };
 
-function Szinkevero(szin) {
-    let setColor = "rgb(" + szin.red + "," + szin.green + "," + szin.blue + ")";
-    document.body.style.backgroundColor = setColor;
-}
+   function GetColorFromInput() {
+      const r = $("#red-value").html();
+      const g = $("#green-value").html();
+      const b = $("#blue-value").html();
+      let color = {
+         red: r,
+         green: g,
+         blue: b,
+      };
+      return color;
+   }
 
-function SzinkodRGB(szin) {
-    document.querySelector("#RGBkodMegjelenito").innerHTML = "rgb(" + szin.red + "," + szin.green + "," + szin.blue + ")";
-}
+   function ChangeBackgroundColor(color) {
+      let setColor = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+      document.body.style.backgroundColor = setColor;
+   }
 
-function LathatoBetuszin(szin) {
-    if (szin.red > 125 || szin.green > 125 || szin.blue > 125) {
-        document.body.style.color = "black";
-        document.querySelector("#keveroFelulet").style.borderColor = "black";
-    }
-    else {
-        document.body.style.color = "white";
-        document.querySelector("#keveroFelulet").style.borderColor = "white";
-    }
-}
+   function RGBcolorCode(color) {
+      $("#color-RGB").html(`rgb(${color.red}, ${color.green}, ${color.blue})`);
+   }
 
-//Szorgalmi:
+   function ChangeFontColor(color) {
+      if (color.red > 125 || color.green > 125 || color.blue > 125) {
+         document.body.style.color = "black";
+         document.querySelector("#color-mix-platform").style.borderColor = "black";
+      } else {
+         document.body.style.color = "white";
+         document.querySelector("#color-mix-platform").style.borderColor = "white";
+      }
+   }
 
-//Gombokhoz rendelt event függvényeket próbáljátok meg paraméteresen elkészíteni
-//HEXA kód megjelenítése RGB alatt
-//MAZOISTÁKNAK: szöveges kifejezés megjelenítése szintén...
+   //Szorgalmi:
+
+   //Gombokhoz rendelt event függvényeket próbáljátok meg paraméteresen elkészíteni
+   //HEXA kód megjelenítése RGB alatt
+   //MAZOISTÁKNAK: szöveges kifejezés megjelenítése szintén...
+});

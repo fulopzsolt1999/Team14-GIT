@@ -1,25 +1,26 @@
 body {
-    height: 100vh;
-    /*1 elem középre igazítása flexboxxal (1 elem esetén)*/
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    color: white;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   background-color: black;
+   color: white;
 }
 
-#RGBkodMegjelenito {
-    font-size: 200px;
+#color-RGB,
+#color-HEX,
+#color-name {
+   font-size: 100px;
 }
 
-#keveroFelulet {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: white;
-    padding: 10px;
-    border-bottom-right-radius: 50px;
+#color-mix-platform {
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   border-width: 1px;
+   border-style: solid;
+   border-color: white;
+   padding: 10px;
+   border-bottom-right-radius: 50px;
 }

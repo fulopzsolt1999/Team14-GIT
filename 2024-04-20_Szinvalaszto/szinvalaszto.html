@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="hu">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="szinvalaszto.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <title>Színválasztó oldal</title>
+   </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Színválasztó oldal</title>
-    <link rel="stylesheet" href="szinvalaszto.css">
-</head>
+   <body>
+      <div id="color-mix-platform">
+         <div class="input-class">
+            <label for="red-set">Red(piros)</label>
+            <input type="range" min="0" max="255" value="0" id="red-set" autocomplete="off" />
+            <p id="red-value">0</p>
+         </div>
 
-<body>
-    <div id="keveroFelulet">
-        <label for="redSet">Red(piros)</label>
-        <input type="range" min="0" max="255" value="0" id="redSet">
-        <p id="redValue">0</p>
+         <div class="input-class">
+            <label for="green-set">Green(zöld)</label>
+            <input type="range" min="0" max="255" value="0" id="green-set" autocomplete="off" />
+            <p id="green-value">0</p>
+         </div>
 
-        <label for="greenSet">Green(zöld)</label>
-        <input type="range" min="0" max="255" value="0" id="greenSet">
-        <p id="greenValue">0</p>
+         <div class="input-class">
+            <label for="blue-set">Blue(kék)</label>
+            <input type="range" min="0" max="255" value="0" id="blue-set" autocomplete="off" />
+            <p id="blue-value">0</p>
+         </div>
 
-        <label for="blueSet">Blue(kék)</label>
-        <input type="range" min="0" max="255" value="0" id="blueSet">
-        <p id="blueValue">0</p>
-    </div>
-    <div id="RGBkodMegjelenito">rgb(0,0,0);</div>
+         <button type="submit" id="search">Keresés</button>
+      </div>
+      <div id="color-RGB">rgb(0, 0, 0)</div>
+      <div id="color-HEX">#000000</div>
+      <div id="color-name">Dude Turn The Lights Back On</div>
 
-    <script src="szinvalaszto.js"></script>
-</body>
-
+      <script src="szinvalaszto.js"></script>
+   </body>
 </html>
