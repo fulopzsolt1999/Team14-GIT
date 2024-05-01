@@ -179,6 +179,7 @@ $(document).ready(function () {
 
    $(".nav-item").click(() => {
       myNumbers = [];
+      $(".greetings").attr("hidden", true);
       $(".select-numbers").html("");
       $(".ball-container").html("");
       const activeNavItemValue = Number(
@@ -259,7 +260,7 @@ $(document).ready(function () {
       }
       setTimeout(() => {
          HandleUserWinning(lottoNumbers);
-      }, 10);
+      }, 50);
    });
 
    const LottoNumberGenerator = (aNV, sN) => {
@@ -320,53 +321,6 @@ $(document).ready(function () {
          $(".ball-container").append(
             `<div class='show-ball row'><img src='img/blank_ball.png'><span id='ball-number-${i}'>${lottoNumbers[i]}</span></div>`
          );
-      }
-   };
-
-   const HandleUserWinning = (lN) => {
-      let sameNumbers = [];
-      myNumbers.sort((a, b) => {
-         return a - b;
-      });
-
-      for (let i = 0; i < lN.length; i++) {
-         for (let j = 0; j < myNumbers.length; j++) {
-            if (Number(myNumbers[j]) === lN[i]) {
-               sameNumbers.push(lN[i]);
-            }
-         }
-      }
-      switch (sameNumbers.length) {
-         case 1:
-            alert(`Gratulálok lett egy találatod! (${sameNumbers[0]})`);
-            break;
-         case 2:
-            alert(`Gratulálok lett két találatod! (${(sameNumbers[0], sameNumbers[1])})`);
-            break;
-         case 3:
-            alert(
-               `Gratulálok lett három találatod! (${
-                  (sameNumbers[0], sameNumbers[1], sameNumbers[2])
-               })`
-            );
-            break;
-         case 4:
-            alert(
-               `Gratulálok lett négy találatod! (${
-                  (sameNumbers[0], sameNumbers[1], sameNumbers[2], sameNumbers[3])
-               })`
-            );
-            break;
-         case 5:
-            alert(
-               `Gratulálok lett öt találatod! (${
-                  (sameNumbers[0], sameNumbers[1], sameNumbers[2], sameNumbers[3], sameNumbers[4])
-               })`
-            );
-            break;
-
-         default:
-            break;
       }
    };
 
@@ -464,6 +418,48 @@ $(document).ready(function () {
       $("#act-biggest-drawed-num").html(actLottoNums[actLottoNums.length - 1]);
       $("#act-lowest-drawed-num").html(actLottoNums[0]);
       $("#act-diff-drawed-num").html(actLottoNums[actLottoNums.length - 1] - actLottoNums[0]);
+   };
+
+   const HandleUserWinning = (lN) => {
+      let sameNumbers = [];
+      myNumbers.sort((a, b) => {
+         return a - b;
+      });
+
+      for (let i = 0; i < lN.length; i++) {
+         for (let j = 0; j < myNumbers.length; j++) {
+            if (Number(myNumbers[j]) === lN[i]) {
+               sameNumbers.push(lN[i]);
+            }
+         }
+      }
+
+      switch (sameNumbers.length) {
+         case 1:
+            alert(`Gratulálok lett egy találatod! < ${sameNumbers[0]} >`);
+            break;
+         case 2:
+            alert(`Gratulálok lett két találatod! < ${sameNumbers[0]}, ${sameNumbers[1]} >`);
+            break;
+         case 3:
+            alert(
+               `Gratulálok lett három találatod! < ${sameNumbers[0]}, ${sameNumbers[1]}, ${sameNumbers[2]} >`
+            );
+            break;
+         case 4:
+            alert(
+               `Gratulálok lett négy találatod! < ${sameNumbers[0]}, ${sameNumbers[1]}, ${sameNumbers[2]}, ${sameNumbers[3]} >`
+            );
+            break;
+         case 5:
+            alert(
+               `Gratulálok lett öt találatod! < ${sameNumbers[0]}, ${sameNumbers[1]}, ${sameNumbers[2]}, ${sameNumbers[3]}, ${sameNumbers[4]} >`
+            );
+            break;
+
+         default:
+            break;
+      }
    };
 });
 

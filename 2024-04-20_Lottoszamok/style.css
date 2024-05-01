@@ -4,6 +4,13 @@
    box-sizing: border-box;
 }
 
+body {
+   background: #000000;
+   background: -webkit-linear-gradient(to right, #000000, #0f9b0f);
+   background: linear-gradient(to right, #000000, #0f9b0f);
+   color: white;
+}
+
 .navbar-brand {
    margin-left: 2rem;
 }
@@ -23,6 +30,30 @@
    margin: 0;
 }
 
+.greetings {
+   width: 50rem;
+   height: 20rem;
+   margin: 10rem auto;
+   color: rgb(255, 255, 255);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   background-image: url("img/4leaf_bg.jpg");
+   background-size: cover;
+   border-radius: 10px;
+}
+
+.greetings h1 {
+   font-size: 3rem;
+   font-weight: bold;
+   text-align: center;
+}
+
+.greetings p {
+   font-size: 1.5rem;
+}
+
 .container {
    width: 100rem;
    height: 75vh;
@@ -40,17 +71,30 @@
 }
 
 .select-my-numbers #drawing {
+   background-color: rgba(9, 73, 6, 0.6);
+   border: none;
    width: auto;
    height: fit-content;
    margin: auto 0;
    font-size: 30px;
+   transition: background-color ease 0.5s;
+}
+
+.select-my-numbers #drawing:disabled {
+   background-color: rgb(87, 53, 53);
+}
+
+.select-my-numbers #drawing:hover {
+   background-color: rgb(0, 170, 0);
 }
 
 .select-my-numbers .select-numbers {
+   margin-right: 1rem;
    height: fit-content;
    display: flex;
    flex-direction: column;
    flex-wrap: wrap;
+   border-radius: 10px;
 }
 
 .select-my-numbers .select-numbers h1 {
@@ -81,17 +125,24 @@
    margin: 0;
    font-size: 18px;
    border: none;
-   background-color: rgba(128, 128, 128, 0.15);
+   background-color: rgb(60, 100, 60);
    border-radius: 10px;
    transition: background-color ease 0.5s;
+   color: white;
+}
+
+.select-my-numbers .select-numbers ul li button:disabled,
+.select-my-numbers .select-numbers ul li button:disabled:hover {
+   background-color: rgb(87, 53, 53);
 }
 
 .select-my-numbers .select-numbers ul li button:hover {
-   background-color: rgba(128, 128, 128, 0.5);
+   background-color: rgb(76, 175, 67);
 }
 
 .select-my-numbers .select-numbers ul li button.selected {
-   background-color: rgba(222, 184, 135);
+   background-color: rgb(0, 255, 0);
+   color: black;
 }
 
 .select-my-numbers .ball-container {
@@ -126,12 +177,14 @@
 #ball-number-6 {
    width: fit-content;
    height: 2.5rem;
+   font-size: 2rem;
+   font-weight: bold;
+   color: black;
+   border-radius: 10px;
    position: absolute;
-   top: 45%;
+   top: 41%;
    left: 50%;
    transform: translate(-50%, -50%);
-   background-color: rgba(0, 0, 0, 0.25);
-   border-radius: 10px;
 }
 
 .table-container table th {
@@ -142,6 +195,7 @@
 
 .table-container table td {
    font-size: 18px;
+   text-align: center;
 }
 
 .table-container table td#lotto-num-cell {
