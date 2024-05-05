@@ -44,7 +44,7 @@ function dataArraytoInterface(): void {
    mainFunction(teamsDataArray);
 }
 
-function mainFunction(tDA: any): void {
+function mainFunction(tDA: FifaData[]): void {
    outputTeamsNum(tDA);
    let avgPoint: number = avgTeamPoint(tDA);
    getTeamsAboveAvgPoint(tDA, avgPoint);
@@ -54,11 +54,11 @@ function mainFunction(tDA: any): void {
    pointChangeStatistics(tDA);
 }
 
-function outputTeamsNum(tDA: any) {
+function outputTeamsNum(tDA: FifaData[]) {
    console.log(`Aktuálisan ${tDA.length} csapat szerepel a ranglistán.`);
 }
 
-function avgTeamPoint(tDA: any): number {
+function avgTeamPoint(tDA: FifaData[]): number {
    let allPoints: number = 0;
    for (let i: number = 0; i < tDA.length; i++) {
       allPoints += tDA[i].pont;
@@ -67,7 +67,7 @@ function avgTeamPoint(tDA: any): number {
    return allPoints / tDA.length;
 }
 
-function getTeamsAboveAvgPoint(tDA: any, aP: any) {
+function getTeamsAboveAvgPoint(tDA: FifaData[], aP: number) {
    let outputArray: FifaData[] = [];
    for (let i: number = 0; i < tDA.length; i++) {
       if (tDA[i].pont > aP) {
@@ -77,7 +77,7 @@ function getTeamsAboveAvgPoint(tDA: any, aP: any) {
    console.table(outputArray);
 }
 
-function getMostImprovedTeam(tDA: any) {
+function getMostImprovedTeam(tDA: FifaData[]) {
    let checkNum: number = 0;
    let getIndex: number = 0;
    for (let i: number = 0; i < tDA.length; i++) {
@@ -98,7 +98,7 @@ function getTeamPrompt() {
    return prompt("Adjon meg egy tetszőleges országot");
 }
 
-function checkTeamInList(tDA: any, gTI: any) {
+function checkTeamInList(tDA: FifaData[], gTI: string | null) {
    let found: boolean = false;
    for (let i = 0; i < tDA.length; i++) {
       if (tDA[i].nev == gTI) {
@@ -112,7 +112,7 @@ function checkTeamInList(tDA: any, gTI: any) {
    }
 }
 
-function pointChangeStatistics(tDA: any) {
+function pointChangeStatistics(tDA: FifaData[]) {
    let allPointChanges: number[] = [];
    let pointChangesObj: Map<number, number> = new Map();
    for (let i = 0; i < tDA.length; i++) {
