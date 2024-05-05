@@ -5,9 +5,20 @@ interface FifaData {
    pont: number;
 }
 
-dataArraytoInterface();
+mainFunction();
 
-function dataArraytoInterface(): void {
+function mainFunction(): void {
+   var teamsDataInterface: FifaData[] = dataArraytoInterface();
+   outputTeamsNum(teamsDataInterface);
+   let avgPoint: number = avgTeamPoint(teamsDataInterface);
+   getTeamsAboveAvgPoint(teamsDataInterface, avgPoint);
+   getMostImprovedTeam(teamsDataInterface);
+   let getTeamInp: string | null = prompt("Adjon meg egy tetszőleges országot");
+   checkTeamInList(teamsDataInterface, getTeamInp);
+   pointChangeStatistics(teamsDataInterface);
+}
+
+function dataArraytoInterface(): FifaData[] {
    const csapatAdat = [
       "Anglia;4;0;1662",
       "Argentína;10;0;1614",
@@ -31,7 +42,7 @@ function dataArraytoInterface(): void {
       "Uruguay;6;-1;1639",
    ];
 
-   var teamsDataArray: FifaData[] = [];
+   var teamsDataInterface: FifaData[] = [];
    for (let i = 0; i < csapatAdat.length; i++) {
       let newTeam = {
          nev: csapatAdat[i].split(";")[0],
@@ -39,22 +50,12 @@ function dataArraytoInterface(): void {
          valtozas: Number(csapatAdat[i].split(";")[2]),
          pont: Number(csapatAdat[i].split(";")[3]),
       };
-      teamsDataArray.push(newTeam);
+      teamsDataInterface.push(newTeam);
    }
-   mainFunction(teamsDataArray);
+   return teamsDataInterface;
 }
 
-function mainFunction(tDA: FifaData[]): void {
-   outputTeamsNum(tDA);
-   let avgPoint: number = avgTeamPoint(tDA);
-   getTeamsAboveAvgPoint(tDA, avgPoint);
-   getMostImprovedTeam(tDA);
-   let getTeamInp: string | null = getTeamPrompt();
-   checkTeamInList(tDA, getTeamInp);
-   pointChangeStatistics(tDA);
-}
-
-function outputTeamsNum(tDA: FifaData[]) {
+function outputTeamsNum(tDA: FifaData[]): void {
    console.log(`Aktuálisan ${tDA.length} csapat szerepel a ranglistán.`);
 }
 
@@ -67,7 +68,7 @@ function avgTeamPoint(tDA: FifaData[]): number {
    return allPoints / tDA.length;
 }
 
-function getTeamsAboveAvgPoint(tDA: FifaData[], aP: number) {
+function getTeamsAboveAvgPoint(tDA: FifaData[], aP: number): void {
    let outputArray: FifaData[] = [];
    for (let i: number = 0; i < tDA.length; i++) {
       if (tDA[i].pont > aP) {
@@ -77,7 +78,7 @@ function getTeamsAboveAvgPoint(tDA: FifaData[], aP: number) {
    console.table(outputArray);
 }
 
-function getMostImprovedTeam(tDA: FifaData[]) {
+function getMostImprovedTeam(tDA: FifaData[]): void {
    let checkNum: number = 0;
    let getIndex: number = 0;
    for (let i: number = 0; i < tDA.length; i++) {
@@ -94,11 +95,7 @@ function getMostImprovedTeam(tDA: FifaData[]) {
    );
 }
 
-function getTeamPrompt() {
-   return prompt("Adjon meg egy tetszőleges országot");
-}
-
-function checkTeamInList(tDA: FifaData[], gTI: string | null) {
+function checkTeamInList(tDA: FifaData[], gTI: string | null): void {
    let found: boolean = false;
    for (let i = 0; i < tDA.length; i++) {
       if (tDA[i].nev == gTI) {
@@ -112,7 +109,7 @@ function checkTeamInList(tDA: FifaData[], gTI: string | null) {
    }
 }
 
-function pointChangeStatistics(tDA: FifaData[]) {
+function pointChangeStatistics(tDA: FifaData[]): void {
    let allPointChanges: number[] = [];
    let pointChangesObj: Map<number, number> = new Map();
    for (let i = 0; i < tDA.length; i++) {
