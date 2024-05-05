@@ -15,10 +15,6 @@ interface Sport {
    medals: number;
 }
 
-interface Rankings {
-   ranking: number;
-   score: number;
-}
 var helsinki: string[] = [
    "1 1 atletika kalapacsvetes",
    "1 1 uszas 400m_gyorsuszas",
