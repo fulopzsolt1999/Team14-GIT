@@ -7,12 +7,6 @@ interface ACBLeague {
    idopont: string;
 }
 
-interface MatchCount {
-   team: string | null;
-   hazai: number;
-   idegen: number;
-}
-
 interface StadiumCount {
    name: string;
    count: number;
