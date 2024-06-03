@@ -20,13 +20,13 @@ document.querySelector(".btn")?.addEventListener("click", () => {
    let inputValue: string = getTAJInputValue();
    let inputValidate: boolean = checkDigitsNumber(inputValue);
    if (inputValidate) {
+      inputFieldToDefault();
       handleFunctionsIfInputValid(inputValue);
    }
 });
 
 function getTAJInputValue(): string {
-   let tajInput: any = document.querySelector("#taj-number");
-   return tajInput.value;
+   return (document.querySelector("#taj-number") as HTMLInputElement).value;
 }
 
 function checkDigitsNumber(inputValue: string): boolean {
@@ -34,6 +34,10 @@ function checkDigitsNumber(inputValue: string): boolean {
       return true;
    }
    return false;
+}
+
+function inputFieldToDefault() {
+   (document.querySelector("#taj-number") as HTMLInputElement).value = "";
 }
 
 function handleFunctionsIfInputValid(inputValue: string): void {
@@ -91,11 +95,18 @@ function showTheResult(
    sumOfMultipliedDigits: number,
    tajNumberValidity: string
 ) {
-   let resultDiv: any = document.querySelector(".result");
-   resultDiv.innerHTML = `
-      <p>Megadott TAJ-szám: ${inputValue}</p>
-      <p>Az ellenőrzőszámjegy: ${controlDigit}</p>
-      <p>A szorzatok összege: ${sumOfMultipliedDigits}</p>
-      <p>${tajNumberValidity}</p>
+   showTheResultDivElement();
+   let resultDiv: Element | null = document.querySelector(".result");
+   if (resultDiv) {
+      resultDiv.innerHTML = `
+      <p>Megadott TAJ-szám: <i><u>${inputValue}</u></i></p>
+      <p>Az ellenőrzőszámjegy: <i><u>${controlDigit}</u></i></p>
+      <p>A szorzatok összege: <i><u>${sumOfMultipliedDigits}</u></i></p>
+      <p class="text-center"><b>${tajNumberValidity}</b></p>
    `;
+   }
+}
+
+function showTheResultDivElement() {
+   document.querySelector(".result")?.removeAttribute("hidden");
 }

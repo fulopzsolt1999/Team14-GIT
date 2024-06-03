@@ -14,18 +14,21 @@ var _a, _b;
     var inputValue = getTAJInputValue();
     var inputValidate = checkDigitsNumber(inputValue);
     if (inputValidate) {
+        inputFieldToDefault();
         handleFunctionsIfInputValid(inputValue);
     }
 });
 function getTAJInputValue() {
-    var tajInput = document.querySelector("#taj-number");
-    return tajInput.value;
+    return document.querySelector("#taj-number").value;
 }
 function checkDigitsNumber(inputValue) {
     if (inputValue.length === 9) {
         return true;
     }
     return false;
+}
+function inputFieldToDefault() {
+    document.querySelector("#taj-number").value = "";
 }
 function handleFunctionsIfInputValid(inputValue) {
     var allDigits = getTAJNumberLastDigit(inputValue);
@@ -74,6 +77,13 @@ function checkTAJNumberValidity(sumOfMultipliedDigits, lastDigit) {
     return "Hibás TAJ szám";
 }
 function showTheResult(inputValue, controlDigit, sumOfMultipliedDigits, tajNumberValidity) {
+    showTheResultDivElement();
     var resultDiv = document.querySelector(".result");
-    resultDiv.innerHTML = "\n      <p>Megadott TAJ-sz\u00E1m: ".concat(inputValue, "</p>\n      <p>Az ellen\u0151rz\u0151sz\u00E1mjegy: ").concat(controlDigit, "</p>\n      <p>A szorzatok \u00F6sszege: ").concat(sumOfMultipliedDigits, "</p>\n      <p>").concat(tajNumberValidity, "</p>\n   ");
+    if (resultDiv) {
+        resultDiv.innerHTML = "\n      <p>Megadott TAJ-sz\u00E1m: <i><u>".concat(inputValue, "</u></i></p>\n      <p>Az ellen\u0151rz\u0151sz\u00E1mjegy: <i><u>").concat(controlDigit, "</u></i></p>\n      <p>A szorzatok \u00F6sszege: <i><u>").concat(sumOfMultipliedDigits, "</u></i></p>\n      <p class=\"text-center\"><b>").concat(tajNumberValidity, "</b></p>\n   ");
+    }
+}
+function showTheResultDivElement() {
+    var _a;
+    (_a = document.querySelector(".result")) === null || _a === void 0 ? void 0 : _a.removeAttribute("hidden");
 }
